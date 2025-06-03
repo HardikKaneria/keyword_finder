@@ -136,6 +136,11 @@ ENV/
 env.bak/
 venv.bak/
 
+MarketingIntent_classifier
+MediaFormat_classifier
+Platform_classifier
+ToneCluster_classifier
+
 # Spyder project settings
 .spyderproject
 .spyproject
