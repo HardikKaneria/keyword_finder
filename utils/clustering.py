@@ -1,10 +1,7 @@
 import matplotlib.pyplot as plt
-import numpy as np
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 from sentence_transformers import SentenceTransformer
-import pandas as pd
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt

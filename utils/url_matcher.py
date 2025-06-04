@@ -2,6 +2,7 @@ import os
 import sqlite3
 import pandas as pd
 import streamlit as st
+import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -11,7 +12,6 @@ DATA_DIR = os.path.join(PROJECT_ROOT, "data")
 EXPORT_DIR = os.path.join(DATA_DIR, "exports")
 os.makedirs(EXPORT_DIR, exist_ok=True)
 WEBSITE_FILE = os.path.join(DATA_DIR, "website_data.db")
-DB_FILE = os.path.join(DATA_DIR, "keyword_data.db")
 
 def match_urls_to_aida(
     df,
@@ -64,9 +64,16 @@ def match_urls_to_aida(
         # Cosine similarity
         similarity_matrix = cosine_similarity(keyword_vecs, page_vecs)
 
-        # Apply depth penalty
-        penalty_array = depth_penalty * website_df["url_depth"].values
-        adjusted_scores = similarity_matrix - penalty_array
+        max_depth = website_df["url_depth"].max()
+        website_df["normalized_depth"] = website_df["url_depth"] / max_depth
+
+
+        penalty_matrix = np.tile(
+            depth_penalty * website_df["normalized_depth"].values, 
+            (len(df), 1)  
+        )
+
+        adjusted_scores = similarity_matrix - penalty_matrix
 
         if progress_bar:
             progress_bar.progress(0.8)

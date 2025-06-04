@@ -1,6 +1,5 @@
 import sys
 import os
-
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import sqlite3
 import json
@@ -81,35 +80,39 @@ def run_aida_page():
     except Exception as e:
         st.error(f"❌ Failed to load or modify aida_output table: {e}")
 
-    if st.button("Generate AIDA Table from Top Keywords"):
+    st.markdown("### ⚙️ Choose Optional Steps")
+
+    run_media = st.checkbox("🗂️ Generate Media Plan")
+    run_urls = st.checkbox("🔗 Match URLs for CTA")
+    use_chatgpt = st.checkbox("🤖 Use ChatGPT for Theme Generation")
+
+    if st.button("🚀 Run AIDA Pipeline"):
+        df = load_data()
+
         with st.spinner("🔍 Classifying AIDA stages..."):
-        
-            df = load_data()
             stage_df = classify_keyword_stage(df)
 
-        with st.spinner("📄 Generating Media Plans..."):
-            media_plans_df = generate_predictions(stage_df)
+        if run_media:
+            with st.spinner("📄 Generating Media Plans..."):
+                media_plans_df = generate_predictions(stage_df)
+        else:
+            media_plans_df = stage_df  # Pass-through if media step is skipped
 
-        use_ChatGPT = False
+        if run_urls:
+            with st.spinner("🎯 Generating 2 Themes for Media Plan"):
+                themes_df = generate_aida_content_plan(media_plans_df, use_chatgpt)
 
-        with st.spinner("Generating 2 Themes for Media Plan"):
-            themes_df = generate_aida_content_plan(media_plans_df, use_ChatGPT)
+            url_depth = 0.5
+            with st.spinner("🔗 Matching URLs for CTA Target..."):
+                final_df = match_urls_to_aida(themes_df, url_depth)
+        else:
+            final_df = media_plans_df  # Pass-through if URL step is skipped
 
-        url_depth = 0.5
-
-        with st.spinner("📄 Matching URLs for CTA Target..."):
-            final_df = match_urls_to_aida(themes_df, url_depth)
-            print(final_df)
-
-        with st.spinner("📄 Storing AIDA Table..."):
+        with st.spinner("💾 Saving Final AIDA Table..."):
             conn = sqlite3.connect(DB_FILE)
-
-            # Convert dicts to JSON strings for SQLite compatibility
             if "ConfidenceScores" in final_df.columns:
                 final_df["ConfidenceScores"] = final_df["ConfidenceScores"].apply(json.dumps)
-
             final_df.to_sql("aida_output", conn, if_exists="replace", index=False)
             conn.close()
 
-            st.success("✅ AIDA Table stored successfully in SQLite!")
-            
+        st.success("✅ Selected AIDA processes completed and saved successfully!")

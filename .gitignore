@@ -140,6 +140,7 @@ MarketingIntent_classifier
 MediaFormat_classifier
 Platform_classifier
 ToneCluster_classifier
+data
 
 # Spyder project settings
 .spyderproject
