@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from sentence_transformers import SentenceTransformer, util
 
-model = SentenceTransformer('all-mpnet-base-v2')  
+model = SentenceTransformer('all-mpnet-base-v2', device='cpu')  
 
 aida_chunks = {
   "Attention": [

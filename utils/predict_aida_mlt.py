@@ -20,7 +20,6 @@ platform_model = DistilBertForSequenceClassification.from_pretrained("Platform_c
 tone_model = DistilBertForSequenceClassification.from_pretrained("ToneCluster_classifier/checkpoint-2211")
 marketing_model = DistilBertForSequenceClassification.from_pretrained("MarketingIntent_classifier/checkpoint-2211")
 
-
 media_model.eval()
 platform_model.eval()
 tone_model.eval()

@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import sqlite3
 from sqlalchemy import create_engine
 import altair as alt
 import sys

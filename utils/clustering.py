@@ -18,7 +18,7 @@ def cluster_keywords(keywords, num_clusters=None, progress_callback=None, status
     if status_callback:
         status_callback.text("🔠 Embedding keywords with SentenceTransformer...")
 
-    model = SentenceTransformer('all-MiniLM-L6-v2')
+    model = SentenceTransformer('all-MiniLM-L6-v2', device='cpu')
     embeddings = model.encode(keywords)
 
     if progress_callback:
