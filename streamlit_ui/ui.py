@@ -11,6 +11,9 @@ from utils.text_analysis import perform_sentiment_analysis, calculate_website_co
 from utils.intent_classifier import bulk_classify_keyword_intents
 from utils.clustering import cluster_keywords
 from services.data_store import store_data_in_sqlite, export_top_keywords_by_intent, store_top_keywords_per_source, get_combined_website_texts
+from services.trends_finder import fetch_trends_data_batch
+
+# === Load environment and set constants ===
 
 CACHE_FILE = "scrape_cache.pkl"
 
@@ -90,6 +93,15 @@ def process_and_display_results(keyword_metrics):
 
     keyword_texts = [km.get("Keyword") for km in keyword_metrics if km.get("Keyword")]
 
+    trend_progress = st.progress(0)
+    trend_status = st.empty()
+    trend_status.text("🔍 Fetching trend scores...")
+
+    df_trends = fetch_trends_data_batch(keyword_texts)
+
+    trend_status.text("✅ Trend data fetched.")
+    trend_progress.progress(100)
+
     sentiment_progress = st.progress(0)
     sentiment_status = st.empty()
     df_sent = perform_sentiment_analysis(keyword_texts, progress_bar=sentiment_progress, status_callback=sentiment_status)
@@ -103,6 +115,7 @@ def process_and_display_results(keyword_metrics):
     clusters = cluster_keywords(keyword_texts, progress_callback=cluster_progress, status_callback=cluster_status)
 
     df_all = pd.DataFrame(keyword_metrics).drop_duplicates(subset=["Keyword"])
+    df_all = df_all.merge(df_trends, on="Keyword", how="left")
     df_scored = df_all.merge(df_sent, on="Keyword")
 
     intent_progress = st.progress(0)
@@ -179,8 +192,17 @@ def process_and_display_results(keyword_metrics):
     # === Paginated & Sorted Table View ===
     st.markdown(f"Showing rows {start_idx + 1} to {end_idx} of {total_rows}")
     df_page = df_final.sort_values("keyword_score", ascending=False).iloc[start_idx:end_idx]
-    st.dataframe(df_page, use_container_width=True)
 
+    selected_keyword = st.selectbox("📈 View trend for a keyword", df_page["Keyword"].unique())
+    selected_trend = df_page[df_page["Keyword"] == selected_keyword]["trend_series"].values[0]
+
+    if selected_trend:
+        trend_df = pd.DataFrame(selected_trend, columns=["Date", "Score"])
+        st.line_chart(trend_df.set_index("Date"))
+    else:
+        st.warning("⚠️ No trend data available for this keyword.")
+
+    st.dataframe(trend_df, use_container_width=True)
 
     csv = df_final.to_csv(index=False)
     st.download_button("📥 Download Results CSV", data=csv, file_name="keyword_results.csv", mime="text/csv")

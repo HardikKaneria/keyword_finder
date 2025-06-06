@@ -10,7 +10,8 @@ from transformers import pipeline
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-
+from transformers import pipeline
+from joblib import Parallel, delayed
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, "../"))  # 
@@ -18,38 +19,35 @@ BOOK_PATH = os.path.join(PROJECT_ROOT, "streamlit_ui/book.csv")
 
 sia = pipeline("sentiment-analysis", model="nlptown/bert-base-multilingual-uncased-sentiment")
 
-def perform_sentiment_analysis(keywords, progress_bar=None, status_callback=None):
-    from transformers import pipeline
+def perform_sentiment_analysis(keywords, progress_bar=None, status_callback=None, n_jobs=2):
 
     sia = pipeline("sentiment-analysis", model="nlptown/bert-base-multilingual-uncased-sentiment")
-    sentiments = []
-    total = len(keywords)
 
-    for i, kw in enumerate(keywords):
-        if status_callback:
-            status_callback.text(f"🧠 {i + 1}/{total} – Analyzing sentiment: {kw}")
-
+    def analyze_sentiment(kw):
         enriched_kw = f"I am reflecting on the topic of {kw} and how it makes people feel."
-        result = sia(enriched_kw)[0]  # e.g., {'label': '4 stars', 'score': 0.875}
-
-        stars = int(result["label"].split()[0])  # Extract "4" from "4 stars"
+        result = sia(enriched_kw)[0]
+        stars = int(result["label"].split()[0])  
         confidence = round(result["score"], 4)
-
-        sentiments.append({
+        return {
             "Keyword": kw,
-            "Sentiment Score": stars,  # ✅ Column expected downstream
-            "Sentiment Confidence": confidence  # ✅ Extra info for analysis
-        })
+            "Sentiment Score": stars,  
+            "Sentiment Confidence": confidence  
+        }
 
-        if progress_bar:
-            progress_bar.progress((i + 1) / total)
+    total = len(keywords)
+    if status_callback:
+        status_callback.text(f"🧠 Starting sentiment analysis for {total} keywords...")
+
+    results = Parallel(n_jobs=n_jobs)(
+        delayed(analyze_sentiment)(kw) for kw in tqdm(keywords, disable=progress_bar is None)
+    )
 
     if progress_bar:
         progress_bar.progress(1.0)
     if status_callback:
-        status_callback.text("Sentiment analysis complete.")
+        status_callback.text("✅ Sentiment analysis complete.")
 
-    return pd.DataFrame(sentiments)
+    return pd.DataFrame(results)
 
 def compute_semantic_scores_batch(batch_keywords, content_embeddings, model):
     keyword_embeddings = model.encode(batch_keywords, convert_to_tensor=True)

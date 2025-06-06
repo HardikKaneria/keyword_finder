@@ -20,7 +20,7 @@ USER_AGENTS = [
     "Mozilla/5.0 (X11; Linux x86_64)"
 ]
 PROXIES = [None]
-CRAWL_DELAY = 0.5
+CRAWL_DELAY = 0.1
 
 def get_paths():
     base_dir = os.path.dirname(os.path.abspath(__file__))
