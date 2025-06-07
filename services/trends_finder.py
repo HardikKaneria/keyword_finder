@@ -20,7 +20,7 @@ def fetch_trends_data_batch(keywords, timeframe="today 3-m", geo="", status_call
     trend_scores = {}
     trend_series_data = {}
 
-    batch_size = 1
+    batch_size = 4
     max_retries = 1
     total = len(keywords)
     processed = 0

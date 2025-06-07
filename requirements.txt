@@ -114,8 +114,8 @@ textblob==0.19.0
 threadpoolctl==3.6.0
 tokenizers==0.13.3
 toml==0.10.2
-torch==2.7.0
-torchaudio==0.11.0
+torch==2.2.0
+torchaudio==2.2.0
 torchvision==0.12.0
 tornado==6.5
 tqdm==4.67.1
