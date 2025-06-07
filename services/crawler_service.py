@@ -12,16 +12,22 @@ import urllib.robotparser
 import re
 import time
 from collections import deque
+from utils.keyword_extractor import extract_keywords_from_visible_text
+# This script is a web crawler that extracts content from websites, stores it in a SQLite database, and provides a Streamlit UI for interaction.
 
 # --- Config ---
 USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
-    "Mozilla/5.0 (X11; Linux x86_64)"
+    "Mozilla/5.0 (X11; Linux x86_64)",
+    "Mozilla/5.0 (Linux; Android 10; SM-G975F)",
+    "Mozilla/5.0 (iPhone; CPU iPhone OS 14_2 like Mac OS X)"
 ]
-PROXIES = [None]
-CRAWL_DELAY = 0.1
+PROXIES = [None]  # You can add proxy dicts here
+CRAWL_DELAY = 0.05
+MAX_RETRY_WAIT = 15
 
+# --- Paths ---
 def get_paths():
     base_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.abspath(os.path.join(base_dir, "../"))
@@ -33,26 +39,25 @@ def get_paths():
 BASE_DIR, DATA_DIR, DB_FILE = get_paths()
 
 # --- Browser ---
-def get_browser(headless=True):
+def get_browser():
     options = Options()
-    if headless:
-        options.add_argument('--headless')
+    options.add_argument('--headless')
     options.add_argument('--disable-gpu')
+    options.add_argument('--no-sandbox')
     return webdriver.Chrome(options=options)
 
 # --- Robots.txt ---
 def is_allowed_by_robots(url):
-    rp = urllib.robotparser.RobotFileParser()
-    parsed = urlparse(url)
-    robots_url = f"{parsed.scheme}://{parsed.netloc}/robots.txt"
-    rp.set_url(robots_url)
     try:
+        rp = urllib.robotparser.RobotFileParser()
+        parsed = urlparse(url)
+        rp.set_url(f"{parsed.scheme}://{parsed.netloc}/robots.txt")
         rp.read()
-        return rp.can_fetch("*", url)
+        return rp.can_fetch(random.choice(USER_AGENTS), url)
     except:
         return True
 
-# --- URL validation ---
+# --- URL Validation ---
 def is_valid_url(url, domain):
     parsed = urlparse(url)
     return (
@@ -61,51 +66,66 @@ def is_valid_url(url, domain):
         not re.search(r"\.(jpg|jpeg|png|gif|pdf|svg|js|css|webp|mp4|zip|woff|ico)$", parsed.path, re.IGNORECASE)
     )
 
-# --- Page scraping ---
-def extract_content(url, use_selenium=False):
+def get_status_code(url):
     try:
         headers = {"User-Agent": random.choice(USER_AGENTS)}
-        proxy = {"http": random.choice(PROXIES), "https": random.choice(PROXIES)} if PROXIES[0] else None
+        response = requests.head(url, headers=headers, allow_redirects=True, timeout=5)
+        return response.status_code
+    except:
+        return None
+
+# --- Content Extraction ---
+def extract_content(url, homepage_url, use_selenium=False):
+    try:
+        headers = {"User-Agent": random.choice(USER_AGENTS)}
+        proxy = {"http": PROXIES[0], "https": PROXIES[0]} if PROXIES[0] else None
 
         if use_selenium:
             browser = get_browser()
+            browser.set_page_load_timeout(MAX_RETRY_WAIT)
             browser.get(url)
+            final_url = browser.current_url
             html = browser.page_source
             browser.quit()
         else:
-            resp = requests.get(url, headers=headers, proxies=proxy, timeout=10)
-            resp.raise_for_status()
+            resp = requests.get(url, headers=headers, proxies=proxy, timeout=MAX_RETRY_WAIT, allow_redirects=True)
+            status = resp.status_code
+            if status in [301, 302, 404]:
+                return None
             html = resp.text
+            final_url = resp.url
+
+        if homepage_url.rstrip('/') == final_url.rstrip('/') and url.rstrip('/') != final_url.rstrip('/'):
+            return None
 
         soup = BeautifulSoup(html, "lxml")
         title = soup.title.string.strip() if soup.title else ""
         meta_desc = soup.find("meta", attrs={"name": "description"})
         og_title = soup.find("meta", attrs={"property": "og:title"})
         og_desc = soup.find("meta", attrs={"property": "og:description"})
-        headings = {
-            "h1": [h.get_text(strip=True) for h in soup.find_all("h1")],
-            "h2": [h.get_text(strip=True) for h in soup.find_all("h2")],
-            "h3": [h.get_text(strip=True) for h in soup.find_all("h3")],
-        }
         for tag in soup(["script", "style", "noscript"]):
             tag.decompose()
-        visible_text = re.sub(r"\s+", " ", soup.get_text(separator=" ", strip=True))
-
+        visible_text = re.sub(r"\\s+", " ", soup.get_text(separator=" ", strip=True))
+        headings = {
+            "h1": "; ".join([h.get_text(strip=True) for h in soup.find_all("h1")]),
+            "h2": "; ".join([h.get_text(strip=True) for h in soup.find_all("h2")]),
+            "h3": "; ".join([h.get_text(strip=True) for h in soup.find_all("h3")]),
+        }
         return {
             "url": url,
             "title": title,
             "meta_description": meta_desc["content"].strip() if meta_desc else "",
             "og_title": og_title["content"].strip() if og_title else "",
             "og_description": og_desc["content"].strip() if og_desc else "",
-            "h1": "; ".join(headings["h1"]),
-            "h2": "; ".join(headings["h2"]),
-            "h3": "; ".join(headings["h3"]),
+            "h1": headings["h1"],
+            "h2": headings["h2"],
+            "h3": headings["h3"],
             "visible_text": visible_text
         }
     except:
         return None
 
-# --- Save to DB ---
+# --- DB ---
 def save_to_db(data):
     conn = sqlite3.connect(DB_FILE)
     c = conn.cursor()
@@ -127,7 +147,12 @@ def save_to_db(data):
     conn.commit()
     conn.close()
 
-# --- Load ---
+def clear_db():
+    conn = sqlite3.connect(DB_FILE)
+    conn.execute("DELETE FROM pages")
+    conn.commit()
+    conn.close()
+
 def load_data():
     conn = sqlite3.connect(DB_FILE)
     try:
@@ -137,17 +162,10 @@ def load_data():
     conn.close()
     return df
 
-# --- Clear DB ---
-def clear_db():
-    conn = sqlite3.connect(DB_FILE)
-    c = conn.cursor()
-    c.execute("DELETE FROM pages")
-    conn.commit()
-    conn.close()
-
-# --- Crawl Logic ---
+# --- Crawler Logic ---
 def crawl(start_url, use_selenium=False, status_area=None, max_depth=2, progress_bar=None, stats_box=None):
     visited = set()
+    retry_queue = []
     domain = urlparse(start_url).netloc
     queue = deque([(start_url, 0)])
     page_counter = 0
@@ -156,72 +174,64 @@ def crawl(start_url, use_selenium=False, status_area=None, max_depth=2, progress
 
     while queue:
         current_url, depth = queue.popleft()
-        current_url = current_url.rstrip('/')
         if current_url in visited or depth > max_depth:
             continue
-        visited.add(current_url)
 
+        status = get_status_code(current_url)
+        if not status or status in [301, 302, 404]:
+            continue
+
+        visited.add(current_url)
         if not is_allowed_by_robots(current_url):
             continue
 
-        page_data = extract_content(current_url, use_selenium=use_selenium)
-        if page_data:
-            save_to_db(page_data)
+        content = extract_content(current_url, homepage_url=start_url, use_selenium=use_selenium)
+        if content:
+            save_to_db(content)
             page_counter += 1
-
-        elapsed = time.time() - start_time
-        estimated_total = (elapsed / page_counter) * (len(queue) + page_counter) if page_counter else 1
-        remaining = estimated_total - elapsed
+        else:
+            retry_queue.append((current_url, depth))
 
         if status_area:
             status_area.markdown(f"✅ Crawled: `{current_url}`")
+
+        elapsed = time.time() - start_time
+        remaining = (elapsed / page_counter * (len(queue) + page_counter)) - elapsed if page_counter else 0
+
         if stats_box:
-            stats_box.markdown(
-                f"""
-                - Pages Crawled: `{page_counter}`  
-                - Queue Size: `{len(queue)}`  
-                - Elapsed Time: `{int(elapsed)}s`  
-                - Est. Remaining: `{int(remaining)}s`
-                """
-            )
+            stats_box.markdown(f"Pages: `{page_counter}` | Queue: `{len(queue)}` | Time: `{int(elapsed)}s` | ETA: `{int(remaining)}s`")
         if progress_bar:
             progress_bar.progress(min(page_counter / total_estimate, 1.0))
 
         try:
             headers = {"User-Agent": random.choice(USER_AGENTS)}
-            if use_selenium:
-                browser = get_browser()
-                browser.get(current_url)
-                html = browser.page_source
-                browser.quit()
-            else:
-                html = requests.get(current_url, headers=headers, timeout=10).text
-
+            html = requests.get(current_url, headers=headers, timeout=10).text
             soup = BeautifulSoup(html, "lxml")
-            for a_tag in soup.find_all("a", href=True):
-                raw_link = urljoin(current_url, a_tag["href"])
-                parsed_link = urlparse(raw_link)
-
-                # Skip fragment or query links
-                if parsed_link.fragment or parsed_link.query:
-                    continue
-
-                clean_link = parsed_link._replace(fragment="", query="").geturl().rstrip('/')
-
-                if is_valid_url(clean_link, domain) and clean_link not in visited:
-                    queue.append((clean_link, depth + 1))
+            for tag in soup.find_all("a", href=True):
+                next_url = urljoin(current_url, tag['href'])
+                parsed = urlparse(next_url)
+                clean = parsed._replace(fragment="", query="").geturl().rstrip('/')
+                if is_valid_url(clean, domain) and clean not in visited:
+                    queue.append((clean, depth + 1))
         except:
             continue
 
         time.sleep(CRAWL_DELAY)
 
+    for retry_url, depth in retry_queue:
+        content = extract_content(retry_url, homepage_url=start_url, use_selenium=use_selenium)
+        print(f"Retrying {retry_url} at depth {depth}...")
+        if content:
+            save_to_db(content)
+            page_counter += 1
+
     return page_counter
 
 # --- UI ---
 def run_crawler_ui():
-    st.title("🕸️ Website Crawler")
+    st.title("🕸️ Smart Website Crawler")
     url_input = st.text_input("Enter Homepage URL", "https://humanness.ing/")
-    use_selenium = st.checkbox("Enable JavaScript Rendering (via Selenium)", value=True)
+    use_selenium = st.checkbox("Enable JS Rendering (via Selenium)", value=True)
     max_depth = st.slider("Max Crawl Depth", 1, 10, value=2)
     start_crawl = st.button("🚀 Start Crawling")
 
@@ -232,7 +242,7 @@ def run_crawler_ui():
     if start_crawl and url_input:
         clear_db()
         status_area.markdown("🔄 Starting crawl...")
-        page_count = crawl(
+        count = crawl(
             start_url=url_input,
             use_selenium=use_selenium,
             status_area=status_area,
@@ -240,34 +250,28 @@ def run_crawler_ui():
             progress_bar=progress_bar,
             stats_box=stats_box
         )
-        st.success(f"🎉 Crawl Complete! Total Pages: {page_count}")
+        st.success(f"🎉 Completed! Pages Crawled: {count}")
 
     st.markdown("---")
     st.subheader("📄 Crawled Pages")
     df = load_data()
-
     if df is not None and not df.empty:
-        st.markdown(f"**Total pages stored: {len(df)}**")
-
-        # === Pagination Setup ===
         rows_per_page = 100
         total_rows = len(df)
-        total_pages = (total_rows - 1) // rows_per_page + 1
-
-        page_number = st.number_input("Page", min_value=1, max_value=total_pages, step=1)
+        page_number = st.number_input("Page", 1, max(1, (total_rows - 1) // rows_per_page + 1))
         start_idx = (page_number - 1) * rows_per_page
         end_idx = min(start_idx + rows_per_page, total_rows)
-
-        # === Paginated View ===
-        st.markdown(f"**Showing rows {start_idx + 1} to {end_idx} of {total_rows}**")
-        st.dataframe(
-            df.loc[start_idx:end_idx - 1, ['url', 'title', 'meta_description', 'h1', 'h2', 'h3', 'visible_text']],
-            use_container_width=True
-        )
+        st.dataframe(df.loc[start_idx:end_idx-1, ['url', 'title', 'meta_description', 'h1', 'h2', 'h3', 'visible_text']], use_container_width=True)
     else:
-        st.info("No data available yet. Run a crawl first.")
+        st.info("No data yet. Start a crawl to begin.")
+
+    st.markdown("---")
+    st.subheader("🧠 Keyword Extraction")
+
+    if st.button("🔑 Extract Keywords from Visible Text"):
+        extract_keywords_from_visible_text()
+        st.success("✅ Keywords extracted and stored in `keywords_extraction` table.")
 
 
-# --- Entry ---
 if __name__ == '__main__':
     run_crawler_ui()

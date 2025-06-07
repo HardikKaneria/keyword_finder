@@ -1,2 +1,21 @@
-Source Keyword,Keyword,Avg Monthly Searches,Competition,Low CPC (USD),High CPC (USD),trend_score,Sentiment Score,Sentiment Confidence,Intent,semantic_score,tfidf_score,content_match_score,relevance_bucket,volume_score,cpc_score,competition_score,sentiment_score_scaled,keyword_score,Cluster
-ai and gaming,minecraft ai download,110,LOW,0.0,0.0,0,4,0.4875,transactional,2.81,1.01,2.45,,0.06612663250123987,0.0,20.0,10.0,5.26,Cluster 2
+Source Keyword,Keyword,Avg Monthly Searches,Competition,Low CPC (USD),High CPC (USD),trend_score,trend_series,Sentiment Score,Sentiment Confidence,Intent,semantic_score,content_match_score,relevance_bucket,volume_score,cpc_score,competition_score,sentiment_score_scaled,keyword_score,Cluster
+Coin master,match masters promo codes,1300,LOW,351.11,3752.64,,,4,0.4999,transactional,4.98,0.0,,1.2839506172839508,13.146016639906582,20.0,10.0,9.33,Cluster 8
+Coin master,facebook coin master,1000,LOW,381.94,1475.53,,,4,0.4716,transactional,4.52,0.0,,0.9876543209876543,5.16898554955481,20.0,10.0,6.85,Cluster 7
+Coin master,coin master facebook,1000,LOW,381.94,1475.53,,,4,0.4677,transactional,4.56,0.0,,0.9876543209876543,5.16898554955481,20.0,10.0,6.85,Cluster 7
+Coin master,download coin master,1900,LOW,178.98,1066.19,,,4,0.4682,transactional,5.18,0.0,,1.8765432098765433,3.7350109473069626,20.0,10.0,6.68,Cluster 10
+Coin master,download coin master app,140,LOW,307.44,1381.33,,,4,0.4706,transactional,5.08,0.0,,0.13827160493827162,4.838989928477594,20.0,10.0,6.49,Cluster 10
+Coin master,download coin master game,20,LOW,301.44,1258.87,,,4,0.4668,transactional,6.37,0.0,,0.019753086419753086,4.409995621077215,20.0,10.0,6.33,Cluster 10
+Coin master,coin master game download,590,LOW,178.96,866.65,,,4,0.4673,transactional,6.4,0.0,,0.582716049382716,3.035994745292658,20.0,10.0,6.09,Cluster 10
+Coin master,coin master free download,590,LOW,125.52,700.7,,,5,0.4533,transactional,5.91,0.0,,0.582716049382716,2.4546489563567366,20.0,10.0,5.91,Cluster 10
+Coin master,download coin master free,590,LOW,125.52,700.7,,,4,0.4471,transactional,5.32,0.0,,0.582716049382716,2.4546489563567366,20.0,10.0,5.91,Cluster 10
+Coin master,download coin master free spins,140,LOW,63.86,451.67,,,4,0.457,transactional,5.81,0.0,,0.13827160493827162,1.582262443438914,20.0,10.0,5.52,Cluster 3
+Coin master,coin master promo codes,480,LOW,0.0,0.0,,,4,0.4879,transactional,5.37,0.0,,0.47407407407407404,0.0,20.0,10.0,5.14,Cluster 8
+Coin master,coin master free spin download,10,LOW,60.45,99.77,,,4,0.4621,transactional,5.62,0.0,,0.009876543209876543,0.34950810100715224,20.0,10.0,5.11,Cluster 3
+Coin master,coinmaster shop,320,LOW,0.0,0.0,,,4,0.5102,transactional,5.33,0.0,,0.3160493827160494,0.0,20.0,10.0,5.09,Cluster 2
+Coin master,coin master free spins link today facebook,210,LOW,0.0,0.0,,,5,0.4363,transactional,5.36,0.0,,0.2074074074074074,0.0,20.0,10.0,5.06,Cluster 7
+Coin master,coin master facebook page,110,LOW,0.0,0.0,,,4,0.4679,transactional,5.14,0.0,,0.10864197530864197,0.0,20.0,10.0,5.03,Cluster 7
+Coin master,promo code for coin master,70,LOW,0.0,0.0,,,4,0.4905,transactional,5.08,0.0,,0.06913580246913581,0.0,20.0,10.0,5.02,Cluster 8
+Coin master,coin master free spin facebook,40,LOW,0.0,0.0,,,4,0.4569,transactional,4.91,0.0,,0.03950617283950617,0.0,20.0,10.0,5.01,Cluster 7
+Coin master,facebook coinmaster,20,LOW,0.0,0.0,,,4,0.477,transactional,4.67,0.0,,0.019753086419753086,0.0,20.0,10.0,5.01,Cluster 7
+Coin master,coinmaster facebook,20,LOW,0.0,0.0,,,4,0.4751,transactional,4.81,0.0,,0.019753086419753086,0.0,20.0,10.0,5.01,Cluster 7
+Coin master,coin master facebook free spins,20,LOW,0.0,0.0,,,4,0.4471,transactional,4.93,0.0,,0.019753086419753086,0.0,20.0,10.0,5.01,Cluster 7

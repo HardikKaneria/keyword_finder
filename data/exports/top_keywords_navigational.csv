@@ -1,4 +1,21 @@
-Source Keyword,Keyword,Avg Monthly Searches,Competition,Low CPC (USD),High CPC (USD),trend_score,Sentiment Score,Sentiment Confidence,Intent,semantic_score,tfidf_score,content_match_score,relevance_bucket,volume_score,cpc_score,competition_score,sentiment_score_scaled,keyword_score,Cluster
-ai and gaming,application of ai in games,10,LOW,0.0,0.0,0,4,0.4908,navigational,4.29,2.03,3.84,,0.0,0.0,20.0,10.0,5.38,Cluster 2
-ai and gaming,openai hide and seek,50,LOW,0.0,0.0,0,4,0.4819,navigational,3.72,1.66,3.31,,0.026450653000495948,0.0,20.0,10.0,5.34,Cluster 1
-ai and gaming,openai game maker,10,UNSPECIFIED,0.0,0.0,0,4,0.4802,navigational,3.79,2.51,3.53,,0.0,0.0,0.0,10.0,1.35,Cluster 1
+Source Keyword,Keyword,Avg Monthly Searches,Competition,Low CPC (USD),High CPC (USD),trend_score,trend_series,Sentiment Score,Sentiment Confidence,Intent,semantic_score,content_match_score,relevance_bucket,volume_score,cpc_score,competition_score,sentiment_score_scaled,keyword_score,Cluster
+Coin master,coin master app,1600,LOW,15.41,1131.27,,,4,0.4944,navigational,5.42,0.0,,1.5802469135802468,3.9629951831849364,20.0,10.0,6.66,Cluster 10
+Coin master,google play coin master,20,LOW,275.32,1534.62,,,4,0.4685,navigational,5.21,0.0,,0.019753086419753086,5.375985987447088,20.0,10.0,6.62,Cluster 9
+Coin master,coin master google play,30,LOW,68.51,1003.67,,,4,0.4726,navigational,4.96,0.0,,0.029629629629629627,3.515994745292658,20.0,10.0,6.06,Cluster 9
+Coin master,coin master website,140,LOW,270.61,960.85,,,4,0.4842,navigational,5.91,0.0,,0.13827160493827162,3.365990366369873,20.0,10.0,6.05,Cluster 2
+Coin master,spin link app,70,LOW,56.65,851.28,,,4,0.4869,navigational,4.74,0.0,,0.06913580246913581,2.9821515107283605,20.0,10.0,5.92,Cluster 1
+Coin master,coin master free app,70,LOW,426.05,832.9,,,4,0.4845,navigational,5.76,0.0,,0.06913580246913581,2.9177638300977957,20.0,10.0,5.9,Cluster 10
+Coin master,coin master free spin app,1300,LOW,66.87,471.01,,,4,0.4793,navigational,5.56,0.0,,1.2839506172839508,1.650013136768355,20.0,10.0,5.88,Cluster 3
+Coin master,coin master rewards app,90,LOW,72.79,695.66,,,4,0.4976,navigational,5.13,0.0,,0.08888888888888889,2.4369931396876368,20.0,10.0,5.76,Cluster 10
+Coin master,coin master spin app,40,LOW,55.22,624.85,,,4,0.4909,navigational,5.46,0.0,,0.03950617283950617,2.188935921763246,20.0,10.0,5.67,Cluster 3
+Coin master,coin master twitter,320,LOW,0.0,0.0,,,4,0.465,navigational,4.33,0.0,,0.3160493827160494,0.0,20.0,10.0,5.09,Cluster 7
+Coin master,twitter coin master,170,LOW,0.0,0.0,,,4,0.466,navigational,4.57,0.0,,0.16790123456790124,0.0,20.0,10.0,5.05,Cluster 7
+Coin master,coin master app page,70,LOW,0.0,0.0,,,4,0.4973,navigational,5.16,0.0,,0.06913580246913581,0.0,20.0,10.0,5.02,Cluster 10
+Coin master,coin master homepage,70,LOW,0.0,0.0,,,4,0.4797,navigational,5.39,0.0,,0.06913580246913581,0.0,20.0,10.0,5.02,Cluster 7
+Coin master,coin master on twitter,30,LOW,0.0,0.0,,,4,0.4563,navigational,4.41,0.0,,0.029629629629629627,0.0,20.0,10.0,5.01,Cluster 7
+Coin master,coin master official website,20,LOW,0.0,0.0,,,4,0.4619,navigational,5.9,0.0,,0.019753086419753086,0.0,20.0,10.0,5.01,Cluster 2
+Coin master,coin master app store,30,LOW,0.0,0.0,,,4,0.4972,navigational,5.23,0.0,,0.029629629629629627,0.0,20.0,10.0,5.01,Cluster 10
+Coin master,twitter coinmaster,30,LOW,0.0,0.0,,,4,0.473,navigational,4.63,0.0,,0.029629629629629627,0.0,20.0,10.0,5.01,Cluster 7
+Coin master,coin master game app,30,LOW,0.0,0.0,,,4,0.4938,navigational,6.25,0.0,,0.029629629629629627,0.0,20.0,10.0,5.01,Cluster 9
+Coin master,coin master free spins twitter,10,LOW,0.0,0.0,,,4,0.4467,navigational,4.8,0.0,,0.009876543209876543,0.0,20.0,10.0,5.0,Cluster 7
+Coin master,coin master plus plus app,10,LOW,0.0,0.0,,,4,0.475,navigational,5.05,0.0,,0.009876543209876543,0.0,20.0,10.0,5.0,Cluster 10

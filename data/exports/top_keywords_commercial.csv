@@ -1,15 +1,3 @@
-Source Keyword,Keyword,Avg Monthly Searches,Competition,Low CPC (USD),High CPC (USD),trend_score,Sentiment Score,Sentiment Confidence,Intent,semantic_score,tfidf_score,content_match_score,relevance_bucket,volume_score,cpc_score,competition_score,sentiment_score_scaled,keyword_score,Cluster
-ai and gaming,best ai game,390,LOW,206.17,944.11,0,5,0.6424,commercial,4.81,2.7,4.39,,0.2512812035047115,21.381562061208157,20.0,10.0,11.93,Cluster 2
-ai and gaming,best ai in a video game,390,LOW,206.17,944.11,0,5,0.4942,commercial,4.67,2.49,4.23,,0.2512812035047115,21.381562061208157,20.0,10.0,11.91,Cluster 2
-2025 game,2025 game,8100,LOW,2.58,6.87,0,4,0.5087,commercial,3.08,2.95,3.05,,5.349644569350306,0.15558709404677426,20.0,10.0,6.96,Cluster 1
-ai and gaming,best graphic card for ai,140,MEDIUM,102.23,473.34,0,5,0.6845,commercial,2.43,1.71,2.29,,0.08596462225161183,10.71988283786028,10.0,10.0,6.47,Cluster 2
-2025 game,new nintendo console 2025,720,LOW,33.5,33.5,0,4,0.4726,commercial,4.79,1.45,4.12,,0.46949909075880314,0.7586852475352166,20.0,10.0,5.78,Cluster 1
-2025 game,earth 2025 game,1000,LOW,0.0,0.0,0,4,0.5124,commercial,3.61,2.95,3.48,,0.6546536617622747,0.0,20.0,10.0,5.54,Cluster 1
-2025 game,cyberpunk 2025,170,LOW,0.0,0.0,0,4,0.4834,commercial,4.84,2.7,4.41,,0.10580261200198379,0.0,20.0,10.0,5.47,Cluster 1
-2025 game,bungie new game 2025,30,LOW,0.0,0.0,0,4,0.5052,commercial,4.66,2.99,4.33,,0.013225326500247974,0.0,20.0,10.0,5.44,Cluster 1
-ai and gaming,new ai game,50,LOW,0.0,0.0,0,4,0.5004,commercial,4.72,2.32,4.24,,0.026450653000495948,0.0,20.0,10.0,5.43,Cluster 2
-ai and gaming,top ai games,50,LOW,0.0,0.0,0,5,0.549,commercial,4.74,2.03,4.2,,0.026450653000495948,0.0,20.0,10.0,5.43,Cluster 2
-2025 game,sony ps4 2025,10,LOW,0.0,0.0,0,4,0.476,commercial,4.17,2.7,3.88,,0.0,0.0,20.0,10.0,5.39,Cluster 1
-2025 game,earth 2025 browser game,10,LOW,0.0,0.0,0,4,0.5068,commercial,4.36,1.63,3.81,,0.0,0.0,20.0,10.0,5.38,Cluster 1
-2025 game,nintendo switch 2 2025,720,MEDIUM,0.0,0.0,0,4,0.4665,commercial,4.78,2.7,4.36,,0.46949909075880314,0.0,10.0,10.0,3.58,Cluster 1
-2025 game,nintendo switch 2025,1600,HIGH,31.78,33.5,0,4,0.4698,commercial,4.69,2.7,4.29,,1.051413456769714,0.7586852475352166,0.0,10.0,1.97,Cluster 1
+Source Keyword,Keyword,Avg Monthly Searches,Competition,Low CPC (USD),High CPC (USD),trend_score,trend_series,Sentiment Score,Sentiment Confidence,Intent,semantic_score,content_match_score,relevance_bucket,volume_score,cpc_score,competition_score,sentiment_score_scaled,keyword_score,Cluster
+Coin master,coin master new update,10,LOW,0.0,0.0,,,4,0.4542,commercial,5.12,0.0,,0.009876543209876543,0.0,20.0,10.0,5.0,Cluster 4
+Coin master,coin master new update 2022,0,UNSPECIFIED,0.0,0.0,,,4,0.4575,commercial,4.82,0.0,,0.0,0.0,0.0,10.0,1.0,Cluster 4

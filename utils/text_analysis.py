@@ -17,48 +17,49 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, "../"))  # 
 BOOK_PATH = os.path.join(PROJECT_ROOT, "streamlit_ui/book.csv")
 
-sia = pipeline("sentiment-analysis", model="nlptown/bert-base-multilingual-uncased-sentiment")
-
-def perform_sentiment_analysis(keywords, progress_bar=None, status_callback=None, n_jobs=2):
-
+def perform_sentiment_analysis(keywords, progress_bar=None, status_callback=None):
     sia = pipeline("sentiment-analysis", model="nlptown/bert-base-multilingual-uncased-sentiment")
+    
+    results = []
+    total = len(keywords)
+    
+    if status_callback:
+        status_callback.text(f"🧠 Starting sentiment analysis for {total} keywords...")
 
-    def analyze_sentiment(kw):
+    for i, kw in enumerate(tqdm(keywords, disable=progress_bar is None)):
         enriched_kw = f"I am reflecting on the topic of {kw} and how it makes people feel."
         result = sia(enriched_kw)[0]
         stars = int(result["label"].split()[0])  
         confidence = round(result["score"], 4)
-        return {
+
+        result_data = {
             "Keyword": kw,
-            "Sentiment Score": stars,  
-            "Sentiment Confidence": confidence  
+            "Sentiment Score": stars,
+            "Sentiment Confidence": confidence
         }
+        results.append(result_data)
 
-    total = len(keywords)
-    if status_callback:
-        status_callback.text(f"🧠 Starting sentiment analysis for {total} keywords...")
+        # Show live update
+        if status_callback:
+            status_callback.text(f"[{i+1}/{total}] ✅ {kw}: {stars} stars ({confidence})")
 
-    results = Parallel(n_jobs=n_jobs)(
-        delayed(analyze_sentiment)(kw) for kw in tqdm(keywords, disable=progress_bar is None)
-    )
+        if progress_bar:
+            progress_bar.progress((i + 1) / total)
 
-    if progress_bar:
-        progress_bar.progress(1.0)
     if status_callback:
         status_callback.text("✅ Sentiment analysis complete.")
 
     return pd.DataFrame(results)
 
-def compute_semantic_scores_batch(batch_keywords, content_embeddings, model):
-    keyword_embeddings = model.encode(batch_keywords, convert_to_tensor=True)
-    sim_matrix = util.cos_sim(keyword_embeddings, content_embeddings)
-    max_scores = sim_matrix.max(dim=1).values.cpu().numpy()
-    avg_scores = sim_matrix.mean(dim=1).cpu().numpy()
-    return np.clip(0.7 * max_scores + 0.3 * avg_scores, 0, 1)
+def compute_semantic_scores_batch(keywords_batch, content_embeddings, model):
+    keyword_embeddings = model.encode(keywords_batch, convert_to_tensor=True)
+    scores = cosine_similarity(keyword_embeddings, content_embeddings)
+    return scores.max(axis=1)
+
 
 def calculate_website_content_scores_parallel(
     df_keywords,
-    website_texts,
+    df_pages,
     use_context=False,
     scale_0_to_10=True,
     verbose=True,
@@ -66,13 +67,13 @@ def calculate_website_content_scores_parallel(
     status_callback=None,
     use_tfidf=True,
     blend_weight_semantic=0.7,
-    n_jobs=4,
-    batch_size=500,
+    n_jobs=2,
+    batch_size=250,
     device="cpu"
 ):
-    if df_keywords.empty or not website_texts:
+    if df_keywords.empty or df_pages.empty:
         if verbose:
-            print("⚠️ No keyword data or website content provided.")
+            print("⚠️ No keyword or website content data available.")
         df_keywords["content_match_score"] = 0.0
         return df_keywords
 
@@ -82,52 +83,59 @@ def calculate_website_content_scores_parallel(
     try:
         model = SentenceTransformer("all-mpnet-base-v2", device=device)
 
+        # Use full visible_text from website content
+        website_texts = df_pages["visible_text"].fillna("").tolist()
+        website_urls = df_pages["url"].tolist()
+
+        if verbose:
+            print(f"⚙️ Encoding {len(website_texts)} website content blocks...")
+        content_embeddings = model.encode(website_texts, convert_to_tensor=True, show_progress_bar=True)
+
         keyword_texts = [
             f"{row['Source Keyword']} {row['Keyword']}" if use_context and "Source Keyword" in row else row["Keyword"]
             for _, row in df_keywords.iterrows()
         ]
 
-        # === SEMANTIC ENCODING ===
+        # === SEMANTIC SIMILARITY ===
         if verbose:
-            print(f"⚙️ Encoding content embeddings ({len(website_texts)} sections)...")
-        content_embeddings = model.encode(website_texts, convert_to_tensor=True, show_progress_bar=True)
-
+            print(f"⚙️ Calculating semantic similarity for {len(keyword_texts)} keywords...")
         batches = [keyword_texts[i:i + batch_size] for i in range(0, len(keyword_texts), batch_size)]
         results = Parallel(n_jobs=n_jobs)(
-            delayed(compute_semantic_scores_batch)(batch, content_embeddings, model) for batch in batches
+            delayed(compute_semantic_scores_batch)(batch, content_embeddings, model) for batch in tqdm(batches)
         )
-
         sem_scores = np.concatenate(results)
         df_keywords["semantic_score"] = np.round(sem_scores * 10, 2) if scale_0_to_10 else sem_scores
 
-        # === TF-IDF ===
+        # === TF-IDF SIMILARITY ===
         if use_tfidf:
             if verbose:
                 print("⚙️ Calculating TF-IDF similarity...")
-            vectorizer = TfidfVectorizer(stop_words="english", max_features=10000)
-            vectorizer.fit(website_texts)
-            content_matrix = vectorizer.transform(website_texts)
-            keyword_matrix = vectorizer.transform(keyword_texts)
-            sim_matrix = cosine_similarity(keyword_matrix, content_matrix)
-            max_scores = sim_matrix.max(axis=1)
-            avg_scores = sim_matrix.mean(axis=1)
+            tfidf = TfidfVectorizer(stop_words="english", max_features=10000)
+            tfidf.fit(website_texts)
+            website_matrix = tfidf.transform(website_texts)
+            keyword_matrix = tfidf.transform(keyword_texts)
+
+            tfidf_sim = cosine_similarity(keyword_matrix, website_matrix)
+            max_scores = tfidf_sim.max(axis=1)
+            avg_scores = tfidf_sim.mean(axis=1)
             tfidf_scores = np.clip(0.7 * max_scores + 0.3 * avg_scores, 0, 1)
             df_keywords["tfidf_score"] = np.round(tfidf_scores * 10, 2) if scale_0_to_10 else tfidf_scores
         else:
             df_keywords["tfidf_score"] = 0
 
-        # === Final Score ===
+        # === FINAL SCORE ===
         df_keywords["content_match_score"] = np.round(
-            blend_weight_semantic * df_keywords["semantic_score"] + (1 - blend_weight_semantic) * df_keywords["tfidf_score"], 2
+            blend_weight_semantic * df_keywords["semantic_score"] + 
+            (1 - blend_weight_semantic) * df_keywords["tfidf_score"], 2
         )
 
         if progress_bar:
             progress_bar.progress(1.0)
         if status_callback:
-            status_callback.text("✅ Website content match scoring complete.")
+            status_callback.text("✅ Step 2 complete: Content match scoring done.")
 
     except Exception as e:
-        print(f"❌ Error during scoring: {e}")
+        print(f"❌ Scoring failed: {e}")
         df_keywords["content_match_score"] = 0.0
 
     return df_keywords
@@ -141,7 +149,7 @@ def calculate_book_content_scores_parallel(
     status_callback=None,
     use_tfidf=True,
     blend_weight_semantic=0.7,
-    n_jobs=4,
+    n_jobs=2,
     batch_size=500,
     device="cpu"
 ):
