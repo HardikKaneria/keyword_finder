@@ -1,8 +1,9 @@
 import pandas as pd
 import numpy as np
 from sentence_transformers import SentenceTransformer, util
+import torch
 
-model = SentenceTransformer('all-mpnet-base-v2', device='cpu')  
+model = SentenceTransformer('all-mpnet-base-v2', device='cuda' if torch.cuda.is_available() else 'cpu')
 
 aida_chunks = {
   "Attention": [

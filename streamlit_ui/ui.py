@@ -97,10 +97,10 @@ def process_and_display_results(keyword_metrics):
     trend_status = st.empty()
     trend_status.text("🔍 Fetching trend scores...")
 
-    df_trends = fetch_trends_data_batch(keyword_texts)
+    # df_trends = fetch_trends_data_batch(keyword_texts)
 
-    trend_status.text("✅ Trend data fetched.")
-    trend_progress.progress(100)
+    # trend_status.text("✅ Trend data fetched.")
+    # trend_progress.progress(100)
 
     sentiment_progress = st.progress(0)
     sentiment_status = st.empty()
@@ -115,7 +115,7 @@ def process_and_display_results(keyword_metrics):
     clusters = cluster_keywords(keyword_texts, progress_callback=cluster_progress, status_callback=cluster_status)
 
     df_all = pd.DataFrame(keyword_metrics).drop_duplicates(subset=["Keyword"])
-    df_all = df_all.merge(df_trends, on="Keyword", how="left")
+    # df_all = df_all.merge(df_trends, on="Keyword", how="left")
     df_scored = df_all.merge(df_sent, on="Keyword")
 
     intent_progress = st.progress(0)

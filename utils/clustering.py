@@ -4,6 +4,7 @@ from sklearn.metrics import silhouette_score
 from sentence_transformers import SentenceTransformer
 import pandas as pd
 import numpy as np
+import torch
 
 
 def cluster_keywords(keywords, num_clusters=None, progress_callback=None, status_callback=None):
@@ -22,7 +23,7 @@ def cluster_keywords(keywords, num_clusters=None, progress_callback=None, status
     if status_callback:
         status_callback.text("🔠 Embedding keywords with SentenceTransformer...")
 
-    model = SentenceTransformer('all-MiniLM-L6-v2')
+    model = SentenceTransformer('all-MiniLM-L6-v2', device='cuda' if torch.cuda.is_available() else 'cpu')
     embeddings = model.encode(keywords)
 
     if progress_callback:
