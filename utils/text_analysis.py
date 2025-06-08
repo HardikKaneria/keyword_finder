@@ -4,13 +4,9 @@ import numpy as np
 from sentence_transformers import SentenceTransformer, util
 from joblib import Parallel, delayed
 from tqdm import tqdm
-import numpy as np
-import pandas as pd
-from transformers import pipeline
-import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from transformers import pipeline
+from transformers import PreTrainedModel
 from joblib import Parallel, delayed
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -18,7 +14,7 @@ PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, "../"))  #
 BOOK_PATH = os.path.join(PROJECT_ROOT, "streamlit_ui/book.csv")
 
 def perform_sentiment_analysis(keywords, progress_bar=None, status_callback=None):
-    sia = pipeline("sentiment-analysis", model="nlptown/bert-base-multilingual-uncased-sentiment")
+    sia = PreTrainedModel("sentiment-analysis", model="nlptown/bert-base-multilingual-uncased-sentiment")
     
     results = []
     total = len(keywords)

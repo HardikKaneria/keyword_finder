@@ -1,19 +1,23 @@
 import streamlit as st
 import os
 import sqlite3
-import random
-import requests
 import pandas as pd
 from urllib.parse import urljoin, urlparse
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
 import urllib.robotparser
 import re
 import time
 from collections import deque
+import urllib3
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from utils.keyword_extractor import extract_keywords_from_visible_text
-# This script is a web crawler that extracts content from websites, stores it in a SQLite database, and provides a Streamlit UI for interaction.
+
+# Disable SSL warnings
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # --- Config ---
 USER_AGENTS = [
@@ -23,7 +27,6 @@ USER_AGENTS = [
     "Mozilla/5.0 (Linux; Android 10; SM-G975F)",
     "Mozilla/5.0 (iPhone; CPU iPhone OS 14_2 like Mac OS X)"
 ]
-PROXIES = [None]  # You can add proxy dicts here
 CRAWL_DELAY = 0.05
 MAX_RETRY_WAIT = 15
 
@@ -53,50 +56,34 @@ def is_allowed_by_robots(url):
         parsed = urlparse(url)
         rp.set_url(f"{parsed.scheme}://{parsed.netloc}/robots.txt")
         rp.read()
-        return rp.can_fetch(random.choice(USER_AGENTS), url)
-    except:
+        allowed = rp.can_fetch("*", url)
+        print(f"[ROBOTS] {url} allowed: {allowed}")
+        return allowed
+    except Exception as e:
+        print(f"[ROBOTS ERROR] {url}: {e}")
         return True
 
 # --- URL Validation ---
 def is_valid_url(url, domain):
     parsed = urlparse(url)
-    return (
+    valid = (
         parsed.scheme in ("http", "https") and
         domain in parsed.netloc and
-        not re.search(r"\.(jpg|jpeg|png|gif|pdf|svg|js|css|webp|mp4|zip|woff|ico)$", parsed.path, re.IGNORECASE)
+        not re.search(r"\\.(jpg|jpeg|png|gif|pdf|svg|js|css|webp|mp4|zip|woff|ico)$", parsed.path, re.IGNORECASE)
     )
-
-def get_status_code(url):
-    try:
-        headers = {"User-Agent": random.choice(USER_AGENTS)}
-        response = requests.head(url, headers=headers, allow_redirects=True, timeout=5)
-        return response.status_code
-    except:
-        return None
+    print(f"[VALIDATE] {url} valid: {valid}")
+    return valid
 
 # --- Content Extraction ---
-def extract_content(url, homepage_url, use_selenium=False):
+def extract_content(url):
     try:
-        headers = {"User-Agent": random.choice(USER_AGENTS)}
-        proxy = {"http": PROXIES[0], "https": PROXIES[0]} if PROXIES[0] else None
-
-        if use_selenium:
-            browser = get_browser()
-            browser.set_page_load_timeout(MAX_RETRY_WAIT)
-            browser.get(url)
-            final_url = browser.current_url
-            html = browser.page_source
-            browser.quit()
-        else:
-            resp = requests.get(url, headers=headers, proxies=proxy, timeout=MAX_RETRY_WAIT, allow_redirects=True)
-            status = resp.status_code
-            if status in [301, 302, 404]:
-                return None
-            html = resp.text
-            final_url = resp.url
-
-        if homepage_url.rstrip('/') == final_url.rstrip('/') and url.rstrip('/') != final_url.rstrip('/'):
-            return None
+        print(f"[EXTRACT] Start extracting: {url}")
+        browser = get_browser()
+        browser.set_page_load_timeout(MAX_RETRY_WAIT)
+        browser.get(url)
+        WebDriverWait(browser, 10).until(lambda d: d.execute_script('return document.readyState') == 'complete')
+        html = browser.page_source
+        browser.quit()
 
         soup = BeautifulSoup(html, "lxml")
         title = soup.title.string.strip() if soup.title else ""
@@ -106,6 +93,9 @@ def extract_content(url, homepage_url, use_selenium=False):
         for tag in soup(["script", "style", "noscript"]):
             tag.decompose()
         visible_text = re.sub(r"\\s+", " ", soup.get_text(separator=" ", strip=True))
+        print(f"[TEXT] Extracted text length: {len(visible_text)}")
+        if not visible_text.strip():
+            return None
         headings = {
             "h1": "; ".join([h.get_text(strip=True) for h in soup.find_all("h1")]),
             "h2": "; ".join([h.get_text(strip=True) for h in soup.find_all("h2")]),
@@ -122,10 +112,11 @@ def extract_content(url, homepage_url, use_selenium=False):
             "h3": headings["h3"],
             "visible_text": visible_text
         }
-    except:
+    except Exception as e:
+        print(f"[ERROR] extract_content failed for {url}: {e}")
         return None
 
-# --- DB ---
+# --- DB Functions ---
 def save_to_db(data):
     conn = sqlite3.connect(DB_FILE)
     c = conn.cursor()
@@ -163,7 +154,7 @@ def load_data():
     return df
 
 # --- Crawler Logic ---
-def crawl(start_url, use_selenium=False, status_area=None, max_depth=2, progress_bar=None, stats_box=None):
+def crawl(start_url, use_selenium=True, status_area=None, max_depth=2, progress_bar=None, stats_box=None):
     visited = set()
     retry_queue = []
     domain = urlparse(start_url).netloc
@@ -177,23 +168,22 @@ def crawl(start_url, use_selenium=False, status_area=None, max_depth=2, progress
         if current_url in visited or depth > max_depth:
             continue
 
-        status = get_status_code(current_url)
-        if not status or status in [301, 302, 404]:
-            continue
-
         visited.add(current_url)
         if not is_allowed_by_robots(current_url):
+            if status_area:
+                status_area.markdown(f"⛔ Blocked by robots.txt: `{current_url}`")
             continue
 
-        content = extract_content(current_url, homepage_url=start_url, use_selenium=use_selenium)
+        content = extract_content(current_url)
         if content:
             save_to_db(content)
             page_counter += 1
+            if status_area:
+                status_area.markdown(f"✅ Crawled: `{current_url}`")
         else:
             retry_queue.append((current_url, depth))
-
-        if status_area:
-            status_area.markdown(f"✅ Crawled: `{current_url}`")
+            if status_area:
+                status_area.markdown(f"❌ Failed to extract: `{current_url}`")
 
         elapsed = time.time() - start_time
         remaining = (elapsed / page_counter * (len(queue) + page_counter)) - elapsed if page_counter else 0
@@ -204,22 +194,24 @@ def crawl(start_url, use_selenium=False, status_area=None, max_depth=2, progress
             progress_bar.progress(min(page_counter / total_estimate, 1.0))
 
         try:
-            headers = {"User-Agent": random.choice(USER_AGENTS)}
-            html = requests.get(current_url, headers=headers, timeout=10).text
-            soup = BeautifulSoup(html, "lxml")
+            browser = get_browser()
+            browser.get(current_url)
+            WebDriverWait(browser, 10).until(lambda d: d.execute_script('return document.readyState') == 'complete')
+            soup = BeautifulSoup(browser.page_source, "lxml")
+            browser.quit()
             for tag in soup.find_all("a", href=True):
                 next_url = urljoin(current_url, tag['href'])
                 parsed = urlparse(next_url)
                 clean = parsed._replace(fragment="", query="").geturl().rstrip('/')
                 if is_valid_url(clean, domain) and clean not in visited:
                     queue.append((clean, depth + 1))
-        except:
-            continue
+        except Exception as e:
+            print(f"[ERROR] While extracting links from {current_url}: {e}")
 
         time.sleep(CRAWL_DELAY)
 
     for retry_url, depth in retry_queue:
-        content = extract_content(retry_url, homepage_url=start_url, use_selenium=use_selenium)
+        content = extract_content(retry_url)
         print(f"Retrying {retry_url} at depth {depth}...")
         if content:
             save_to_db(content)
@@ -230,9 +222,9 @@ def crawl(start_url, use_selenium=False, status_area=None, max_depth=2, progress
 # --- UI ---
 def run_crawler_ui():
     st.title("🕸️ Smart Website Crawler")
-    url_input = st.text_input("Enter Homepage URL", "https://humanness.ing/")
+    url_input = st.text_input("Enter Homepage URL", "https://genzgamecode.com/")
     use_selenium = st.checkbox("Enable JS Rendering (via Selenium)", value=True)
-    max_depth = st.slider("Max Crawl Depth", 1, 10, value=2)
+    max_depth = st.slider("Max Crawl Depth", 1, 10, value=10)
     start_crawl = st.button("🚀 Start Crawling")
 
     status_area = st.empty()
@@ -272,6 +264,12 @@ def run_crawler_ui():
         extract_keywords_from_visible_text()
         st.success("✅ Keywords extracted and stored in `keywords_extraction` table.")
 
-
 if __name__ == '__main__':
-    run_crawler_ui()
+    crawl(
+            start_url='https://genzgamecode.com/',
+            use_selenium=True,
+            status_area=False,
+            max_depth=10,
+            progress_bar=False,
+            stats_box=False
+        )
