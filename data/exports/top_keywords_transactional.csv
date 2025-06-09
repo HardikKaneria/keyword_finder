@@ -1,21 +1,21 @@
-Source Keyword,Keyword,Avg Monthly Searches,Competition,Low CPC (USD),High CPC (USD),trend_score,trend_series,Sentiment Score,Sentiment Confidence,Intent,semantic_score,content_match_score,relevance_bucket,volume_score,cpc_score,competition_score,sentiment_score_scaled,keyword_score,Cluster
-Coin master,match masters promo codes,1300,LOW,351.11,3752.64,,,4,0.4999,transactional,4.98,0.0,,1.2839506172839508,13.146016639906582,20.0,10.0,9.33,Cluster 8
-Coin master,facebook coin master,1000,LOW,381.94,1475.53,,,4,0.4716,transactional,4.52,0.0,,0.9876543209876543,5.16898554955481,20.0,10.0,6.85,Cluster 7
-Coin master,coin master facebook,1000,LOW,381.94,1475.53,,,4,0.4677,transactional,4.56,0.0,,0.9876543209876543,5.16898554955481,20.0,10.0,6.85,Cluster 7
-Coin master,download coin master,1900,LOW,178.98,1066.19,,,4,0.4682,transactional,5.18,0.0,,1.8765432098765433,3.7350109473069626,20.0,10.0,6.68,Cluster 10
-Coin master,download coin master app,140,LOW,307.44,1381.33,,,4,0.4706,transactional,5.08,0.0,,0.13827160493827162,4.838989928477594,20.0,10.0,6.49,Cluster 10
-Coin master,download coin master game,20,LOW,301.44,1258.87,,,4,0.4668,transactional,6.37,0.0,,0.019753086419753086,4.409995621077215,20.0,10.0,6.33,Cluster 10
-Coin master,coin master game download,590,LOW,178.96,866.65,,,4,0.4673,transactional,6.4,0.0,,0.582716049382716,3.035994745292658,20.0,10.0,6.09,Cluster 10
-Coin master,coin master free download,590,LOW,125.52,700.7,,,5,0.4533,transactional,5.91,0.0,,0.582716049382716,2.4546489563567366,20.0,10.0,5.91,Cluster 10
-Coin master,download coin master free,590,LOW,125.52,700.7,,,4,0.4471,transactional,5.32,0.0,,0.582716049382716,2.4546489563567366,20.0,10.0,5.91,Cluster 10
-Coin master,download coin master free spins,140,LOW,63.86,451.67,,,4,0.457,transactional,5.81,0.0,,0.13827160493827162,1.582262443438914,20.0,10.0,5.52,Cluster 3
-Coin master,coin master promo codes,480,LOW,0.0,0.0,,,4,0.4879,transactional,5.37,0.0,,0.47407407407407404,0.0,20.0,10.0,5.14,Cluster 8
-Coin master,coin master free spin download,10,LOW,60.45,99.77,,,4,0.4621,transactional,5.62,0.0,,0.009876543209876543,0.34950810100715224,20.0,10.0,5.11,Cluster 3
-Coin master,coinmaster shop,320,LOW,0.0,0.0,,,4,0.5102,transactional,5.33,0.0,,0.3160493827160494,0.0,20.0,10.0,5.09,Cluster 2
-Coin master,coin master free spins link today facebook,210,LOW,0.0,0.0,,,5,0.4363,transactional,5.36,0.0,,0.2074074074074074,0.0,20.0,10.0,5.06,Cluster 7
-Coin master,coin master facebook page,110,LOW,0.0,0.0,,,4,0.4679,transactional,5.14,0.0,,0.10864197530864197,0.0,20.0,10.0,5.03,Cluster 7
-Coin master,promo code for coin master,70,LOW,0.0,0.0,,,4,0.4905,transactional,5.08,0.0,,0.06913580246913581,0.0,20.0,10.0,5.02,Cluster 8
-Coin master,coin master free spin facebook,40,LOW,0.0,0.0,,,4,0.4569,transactional,4.91,0.0,,0.03950617283950617,0.0,20.0,10.0,5.01,Cluster 7
-Coin master,facebook coinmaster,20,LOW,0.0,0.0,,,4,0.477,transactional,4.67,0.0,,0.019753086419753086,0.0,20.0,10.0,5.01,Cluster 7
-Coin master,coinmaster facebook,20,LOW,0.0,0.0,,,4,0.4751,transactional,4.81,0.0,,0.019753086419753086,0.0,20.0,10.0,5.01,Cluster 7
-Coin master,coin master facebook free spins,20,LOW,0.0,0.0,,,4,0.4471,transactional,4.93,0.0,,0.019753086419753086,0.0,20.0,10.0,5.01,Cluster 7
+Source Keyword,Keyword,Avg Monthly Searches,Competition,Low CPC (USD),High CPC (USD),Sentiment Score,Sentiment Confidence,Intent,semantic_score,tfidf_score,keyword_found_on_site,content_match_score,relevance_bucket,volume_score,cpc_score,competition_score,sentiment_score_scaled,keyword_score,Cluster
+Call of Dragon,call of dragons download,50,LOW,187.55,6415.11,4,0.4947,transactional,5.81,1.74,0,5.0,,0.014814814814814814,2.530887608949917,20.0,10.0,6.26,Cluster 8
+Call of Dragon,call of dragon download,50,LOW,187.55,6415.11,4,0.4773,transactional,5.59,0.85,0,4.64,,0.014814814814814814,2.530887608949917,20.0,10.0,6.23,Cluster 8
+Coin Master,match masters promo codes,1300,LOW,351.11,3752.64,4,0.4999,transactional,5.86,1.38,0,4.96,,0.3851851851851852,1.4804906037230563,20.0,10.0,6.06,Cluster 5
+Pop Slots Casino,pop slots facebook,590,LOW,381.09,2369.59,4,0.4715,transactional,7.48,2.1,0,6.4,,0.1748148148148148,0.9348500601379609,20.0,10.0,5.97,Cluster 7
+Pop Slots Casino,facebook pop slots,590,LOW,381.09,2369.59,4,0.4864,transactional,7.23,2.1,0,6.2,,0.1748148148148148,0.9348500601379609,20.0,10.0,5.95,Cluster 7
+Texas HoldEm Poker,texas hold em against dealer,70,LOW,333.99,2819.19,4,0.4449,transactional,6.94,2.21,0,5.99,,0.02074074074074074,1.1122261408261926,20.0,10.0,5.94,Cluster 2
+Family Island,family island download,90,LOW,379.56,3424.92,4,0.4885,transactional,6.17,1.01,0,5.14,,0.026666666666666665,1.3511985904598285,20.0,10.0,5.93,Cluster 8
+Texas HoldEm Poker,texas holdem poker near me,1900,LOW,87.35,668.83,4,0.5124,transactional,7.14,1.19,0,5.95,,0.562962962962963,0.26386664601136584,20.0,10.0,5.84,Cluster 2
+Texas HoldEm Poker,texas hold em poker tournaments near me,1900,LOW,87.35,668.83,4,0.5142,transactional,6.68,2.28,0,5.8,,0.562962962962963,0.26386664601136584,20.0,10.0,5.83,Cluster 2
+Texas HoldEm Poker,dealing texas hold em,1600,LOW,3.43,292.88,4,0.4798,transactional,7.69,1.82,0,6.52,,0.47407407407407404,0.11554694508889975,20.0,10.0,5.83,Cluster 2
+Texas HoldEm Poker,texas hold em dealing,1600,LOW,3.43,292.88,4,0.5,transactional,7.56,1.82,0,6.41,,0.47407407407407404,0.11554694508889975,20.0,10.0,5.82,Cluster 2
+Texas HoldEm Poker,texas hold em near me,1600,LOW,98.48,615.88,4,0.49,transactional,6.97,2.21,0,6.02,,0.47407407407407404,0.2429768251207033,20.0,10.0,5.82,Cluster 2
+Texas HoldEm Poker,texas hold em tournaments near me,1900,LOW,87.35,668.83,4,0.5149,transactional,6.52,2.23,0,5.66,,0.562962962962963,0.26386664601136584,20.0,10.0,5.81,Cluster 2
+Texas HoldEm Poker,texas hold em games near me,1600,LOW,98.48,615.88,4,0.507,transactional,6.68,2.42,0,5.83,,0.47407407407407404,0.2429768251207033,20.0,10.0,5.8,Cluster 2
+Texas HoldEm Poker,texas holdem tournaments near me,1900,LOW,87.35,668.83,4,0.5201,transactional,6.53,1.23,0,5.47,,0.562962962962963,0.26386664601136584,20.0,10.0,5.8,Cluster 2
+Texas HoldEm Poker,texas holdem near me,1600,LOW,98.48,615.88,4,0.5163,transactional,6.97,1.08,0,5.79,,0.47407407407407404,0.2429768251207033,20.0,10.0,5.79,Cluster 2
+Coin Master,coin master facebook,1000,LOW,381.94,1475.53,4,0.4677,transactional,6.0,2.32,0,5.26,,0.2962962962962963,0.5821257302889383,20.0,10.0,5.79,Cluster 5
+Texas HoldEm Poker,dealing texas holdem poker,1600,LOW,3.43,292.88,4,0.4893,transactional,7.47,0.86,0,6.15,,0.47407407407407404,0.11554694508889975,20.0,10.0,5.79,Cluster 2
+Texas HoldEm Poker,texas holdem dealing,1600,LOW,3.43,292.88,4,0.5121,transactional,7.4,0.73,0,6.07,,0.47407407407407404,0.11554694508889975,20.0,10.0,5.78,Cluster 2
+Texas HoldEm Poker,texas holdem games near me,1600,LOW,98.48,615.88,4,0.5165,transactional,6.75,1.41,0,5.68,,0.47407407407407404,0.2429768251207033,20.0,10.0,5.78,Cluster 2

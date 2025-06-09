@@ -6,8 +6,8 @@ import json
 import pandas as pd
 import streamlit as st
 from utils.AIDA_stage import classify_keyword_stage
-from services.idea_generation import generate_aida_content_plan
-from utils.predict_aida_mlt import generate_predictions
+# from services.idea_generation import generate_aida_content_plan
+# from utils.predict_aida_mlt import generate_predictions
 from utils.url_matcher import match_urls_to_aida
 
 # === Load environment and set constants ===
@@ -84,7 +84,7 @@ def run_aida_page():
 
     run_media = st.checkbox("🗂️ Generate Media Plan")
     run_urls = st.checkbox("🔗 Match URLs for CTA")
-    use_chatgpt = st.checkbox("🤖 Use ChatGPT for Theme Generation")
+    # use_chatgpt = st.checkbox("🤖 Use ChatGPT for Theme Generation")
 
     if st.button("🚀 Run AIDA Pipeline"):
         df = load_data()
@@ -94,15 +94,17 @@ def run_aida_page():
 
         if run_media:
             with st.spinner("📄 Generating Media Plans..."):
-                media_plans_df = generate_predictions(stage_df)
+                # media_plans_df = generate_predictions(stage_df)
+                media_plans_df = stage_df
         else:
             media_plans_df = stage_df  # Pass-through if media step is skipped
 
         if run_urls:
             with st.spinner("🎯 Generating 2 Themes for Media Plan"):
-                themes_df = generate_aida_content_plan(media_plans_df, use_chatgpt)
+                # themes_df = generate_aida_content_plan(media_plans_df, use_chatgpt)
+                themes_df = media_plans_df  # Pass-through if media step is skipped
 
-            url_depth = 0.5
+            url_depth = 10
             with st.spinner("🔗 Matching URLs for CTA Target..."):
                 final_df = match_urls_to_aida(themes_df, url_depth)
         else:

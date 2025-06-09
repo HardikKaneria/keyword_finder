@@ -1,21 +1,21 @@
-Source Keyword,Keyword,Avg Monthly Searches,Competition,Low CPC (USD),High CPC (USD),trend_score,trend_series,Sentiment Score,Sentiment Confidence,Intent,semantic_score,content_match_score,relevance_bucket,volume_score,cpc_score,competition_score,sentiment_score_scaled,keyword_score,Cluster
-Coin master,coin master,40500,LOW,174.91,1357.35,,,4,0.4996,informational,4.91,0.0,,40.0,4.754984673770252,20.0,10.0,18.43,Cluster 2
-Coin master,coin master game,40500,LOW,174.91,1357.35,,,4,0.5019,informational,5.72,0.0,,40.0,4.754984673770252,20.0,10.0,18.43,Cluster 9
-Coin master,free match masters gift,880,LOW,8563.75,8563.75,,,4,0.4804,informational,4.62,0.0,,0.8691358024691358,30.0,20.0,10.0,14.26,Cluster 6
-Coin master,coin master free,5400,LOW,304.87,904.33,,,4,0.4755,informational,5.67,0.0,,5.333333333333333,3.1679929937235443,20.0,10.0,7.55,Cluster 2
-Coin master,coins master cheat,880,LOW,470.15,1997.97,,,5,0.2238,informational,5.5,0.0,,0.8691358024691358,6.999165085388994,20.0,10.0,7.36,Cluster 2
-Coin master,coin master cheats android,20,LOW,182.76,1721.21,,,4,0.3646,informational,5.31,0.0,,0.019753086419753086,6.0296365494088455,20.0,10.0,6.81,Cluster 10
-Coin master,coin spins,480,LOW,423.05,1560.32,,,4,0.5008,informational,4.53,0.0,,0.47407407407407404,5.466016639906583,20.0,10.0,6.78,Cluster 3
-Coin master,moonactive free spins,90,LOW,225.23,1456.69,,,4,0.4813,informational,4.31,0.0,,0.08888888888888889,5.102986425339367,20.0,10.0,6.56,Cluster 3
-Coin master,coin master free games,2900,LOW,274.04,669.69,,,4,0.4854,informational,6.4,0.0,,2.864197530864198,2.3460166399065834,20.0,10.0,6.56,Cluster 9
-Coin master,game coin master,880,LOW,211.52,1019.32,,,4,0.5072,informational,6.02,0.0,,0.8691358024691358,3.5708188585607945,20.0,10.0,6.33,Cluster 9
-Coin master,coin master com,140,LOW,205.53,1088.45,,,4,0.4925,informational,5.22,0.0,,0.13827160493827162,3.812990804262152,20.0,10.0,6.19,Cluster 2
-Coin master,coinmaster coins,320,LOW,494.98,970.27,,,4,0.5117,informational,5.03,0.0,,0.3160493827160494,3.398989928477594,20.0,10.0,6.11,Cluster 2
-Coin master,coin master apk,480,LOW,200.95,891.49,,,4,0.4978,informational,5.17,0.0,,0.47407407407407404,3.1230126988760762,20.0,10.0,6.08,Cluster 5
-Coin master,play coin master,720,LOW,68.51,793.43,,,4,0.4885,informational,5.55,0.0,,0.7111111111111111,2.7794949642387974,20.0,10.0,6.05,Cluster 9
-Coin master,coin master game online,480,LOW,229.51,842.67,,,4,0.4729,informational,5.99,0.0,,0.47407407407407404,2.9519894905853157,20.0,10.0,6.03,Cluster 9
-Coin master,coin master online,480,LOW,229.51,842.67,,,4,0.4782,informational,5.54,0.0,,0.47407407407407404,2.9519894905853157,20.0,10.0,6.03,Cluster 2
-Coin master,google coin master,170,LOW,159.29,925.74,,,4,0.4736,informational,5.5,0.0,,0.16790123456790124,3.2429951831849366,20.0,10.0,6.02,Cluster 2
-Coin master,moon active coin master,140,LOW,327.99,913.75,,,4,0.4815,informational,4.44,0.0,,0.13827160493827162,3.2009925558312653,20.0,10.0,6.0,Cluster 2
-Coin master,match master free gift,720,LOW,219.23,632.0,,,4,0.4833,informational,4.82,0.0,,0.7111111111111111,2.213983360093417,20.0,10.0,5.88,Cluster 6
-Coin master,coin master unlimited spins,320,LOW,53.99,725.35,,,5,0.4784,informational,5.04,0.0,,0.3160493827160494,2.5410013136768357,20.0,10.0,5.86,Cluster 3
+Source Keyword,Keyword,Avg Monthly Searches,Competition,Low CPC (USD),High CPC (USD),Sentiment Score,Sentiment Confidence,Intent,semantic_score,tfidf_score,keyword_found_on_site,content_match_score,relevance_bucket,volume_score,cpc_score,competition_score,sentiment_score_scaled,keyword_score,Cluster
+Souls,souls,135000,LOW,295.45,1013.09,4,0.4948,informational,5.53,2.33,0,4.89,,40.0,0.399684015979628,20.0,10.0,17.61,Cluster 8
+Call of Dragon,callofdragons,20,LOW,177.27,76041.82,4,0.5128,informational,6.3,1.1,0,5.26,,0.005925925925925926,30.0,20.0,10.0,14.53,Cluster 8
+Texas HoldEm Poker,texas hold em,90500,LOW,105.33,728.78,4,0.486,informational,8.06,2.21,0,6.89,,26.814814814814817,0.28751810516897147,20.0,10.0,13.82,Cluster 2
+Texas HoldEm Poker,texas holdem,90500,LOW,105.33,728.78,4,0.5063,informational,8.15,1.08,0,6.74,,26.814814814814817,0.28751810516897147,20.0,10.0,13.8,Cluster 2
+Texas HoldEm Poker,texas holdem hands,110000,MEDIUM,114.87,381.09,4,0.4982,informational,7.72,0.73,0,6.32,,32.59259259259259,0.15034753244990715,10.0,10.0,13.45,Cluster 2
+Sea of Conquest,sea of conquest,2900,LOW,955.71,53707.42,4,0.503,informational,7.16,2.64,0,6.26,,0.8592592592592592,21.188638041540823,20.0,10.0,12.24,Cluster 8
+Survivor.io,survivor io++,49500,LOW,137.88,502.69,4,0.4824,informational,5.91,1.41,0,5.01,,14.666666666666666,0.1983211343442332,20.0,10.0,9.96,Cluster 4
+Survivor.io,survivor io,49500,LOW,137.88,502.69,4,0.5025,informational,5.35,1.41,1,4.56,,14.666666666666666,0.1983211343442332,20.0,10.0,9.92,Cluster 4
+Survivor.io,survivors io,49500,LOW,137.88,502.69,4,0.5081,informational,5.48,1.15,0,4.61,,14.666666666666666,0.1983211343442332,20.0,10.0,9.92,Cluster 4
+Coin Master,coin master game,40500,LOW,174.91,1357.35,4,0.5019,informational,6.85,4.16,0,6.31,,12.0,0.5355013859478901,20.0,10.0,9.39,Cluster 5
+Coin Master,coin master,40500,LOW,174.91,1357.35,4,0.4996,informational,6.11,3.58,1,5.6,,12.0,0.5355013859478901,20.0,10.0,9.32,Cluster 5
+Souls,soul train,40500,LOW,0.0,0.0,4,0.5001,informational,4.96,0.99,0,4.17,,12.0,0.0,20.0,10.0,9.02,Cluster 8
+Texas HoldEm Poker,texas hold em zynga,33100,LOW,79.9,685.13,4,0.4784,informational,7.23,2.21,0,6.23,,9.807407407407407,0.270297317975819,20.0,10.0,8.65,Cluster 2
+Whiteout Survival,whiteout survival,27100,LOW,263.19,4337.54,4,0.4889,informational,5.25,2.27,1,4.65,,8.02962962962963,1.7112452069137742,20.0,10.0,8.39,Cluster 8
+AFK Journey,afk journey,27100,LOW,558.36,2636.78,4,0.5117,informational,3.87,1.51,0,3.4,,8.02962962962963,1.0402617927871793,20.0,10.0,8.06,Cluster 1
+Call of Dragon,calls of dragons,4400,LOW,975.41,16067.31,4,0.5217,informational,7.0,2.44,0,6.09,,1.3037037037037036,6.33887116326253,20.0,10.0,7.9,Cluster 8
+Call of Dragon,call of dragon,4400,LOW,975.41,16067.31,4,0.5072,informational,6.76,1.1,0,5.63,,1.3037037037037036,6.33887116326253,20.0,10.0,7.86,Cluster 8
+Call of Dragon,calls of dragon,4400,LOW,975.41,16067.31,4,0.5033,informational,6.86,1.1,0,5.71,,1.3037037037037036,6.33887116326253,20.0,10.0,7.86,Cluster 8
+Call of Dragon,call of dragons apk,20,LOW,114.71,16498.92,4,0.5044,informational,4.88,2.44,0,4.39,,0.005925925925925926,6.5091498336047175,20.0,10.0,7.39,Cluster 8
+Call of Dragon,call of dragon apk,20,LOW,114.71,16498.92,4,0.5022,informational,4.89,1.1,0,4.13,,0.005925925925925926,6.5091498336047175,20.0,10.0,7.37,Cluster 8

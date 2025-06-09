@@ -21,14 +21,14 @@ def get_combined_website_texts(db_file=WEBSITE_FILE):
     try:
         df = pd.read_sql("SELECT url, title, meta_description, h1, h2, h3, visible_text FROM pages", conn)
         df.fillna("", inplace=True)
-        df["combined"] = (
+        df["visible_text"] = (
             df["title"] + " " + df["meta_description"] + " " +
             df["h1"] + " " + df["h2"] + " " + df["h3"] + " " + df["visible_text"]
         )
-        return df[["url", "combined"]].to_dict(orient="records")
+        return df[["url", "visible_text"]]  # ✅ important: return as DataFrame
     except Exception as e:
         print(f"❌ Failed to load website data: {e}")
-        return []
+        return pd.DataFrame(columns=["url", "visible_text"])
     finally:
         conn.close()
 
@@ -82,8 +82,8 @@ def store_top_keywords_per_source(df, table_name="top_keywords_per_source", top_
             min_allowed = top_score * min_score_ratio
             filtered = sorted_group[
                 (sorted_group["keyword_score"] >= min_allowed) &
-                (sorted_group["Avg Monthly Searches"] > 100) &
-                (sorted_group["content_match_score"] < 4) &
+                (sorted_group["Avg Monthly Searches"] > 1000) &
+                (sorted_group["content_match_score"] < 10) &
                 (sorted_group["content_match_score"] >= 0.2)
             ]
             limited = filtered.head(top_n)
