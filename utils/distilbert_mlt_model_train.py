@@ -16,8 +16,8 @@ from sklearn.metrics import accuracy_score
 import torch
 
 # === Load Datasets ===
-train_df = pd.read_csv("utils/aida_train_clean.csv")
-val_df = pd.read_csv("utils/aida_val_clean.csv")
+train_df = pd.read_csv("utils/train.csv")
+val_df = pd.read_csv("utils/validation.csv")
 
 # === Combine into model input ===
 def create_input_text(row):
