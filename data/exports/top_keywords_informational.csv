@@ -1,21 +1,21 @@
-Source Keyword,Keyword,Avg Monthly Searches,Competition,Low CPC (USD),High CPC (USD),Sentiment Score,Sentiment Confidence,Intent,semantic_score,tfidf_score,keyword_found_on_site,content_match_score,relevance_bucket,volume_score,cpc_score,competition_score,sentiment_score_scaled,keyword_score,Cluster
-Souls,souls,135000,LOW,295.45,1013.09,4,0.4948,informational,5.53,2.33,0,4.89,,40.0,0.399684015979628,20.0,10.0,17.61,Cluster 8
-Call of Dragon,callofdragons,20,LOW,177.27,76041.82,4,0.5128,informational,6.3,1.1,0,5.26,,0.005925925925925926,30.0,20.0,10.0,14.53,Cluster 8
-Texas HoldEm Poker,texas hold em,90500,LOW,105.33,728.78,4,0.486,informational,8.06,2.21,0,6.89,,26.814814814814817,0.28751810516897147,20.0,10.0,13.82,Cluster 2
-Texas HoldEm Poker,texas holdem,90500,LOW,105.33,728.78,4,0.5063,informational,8.15,1.08,0,6.74,,26.814814814814817,0.28751810516897147,20.0,10.0,13.8,Cluster 2
-Texas HoldEm Poker,texas holdem hands,110000,MEDIUM,114.87,381.09,4,0.4982,informational,7.72,0.73,0,6.32,,32.59259259259259,0.15034753244990715,10.0,10.0,13.45,Cluster 2
-Sea of Conquest,sea of conquest,2900,LOW,955.71,53707.42,4,0.503,informational,7.16,2.64,0,6.26,,0.8592592592592592,21.188638041540823,20.0,10.0,12.24,Cluster 8
-Survivor.io,survivor io++,49500,LOW,137.88,502.69,4,0.4824,informational,5.91,1.41,0,5.01,,14.666666666666666,0.1983211343442332,20.0,10.0,9.96,Cluster 4
-Survivor.io,survivor io,49500,LOW,137.88,502.69,4,0.5025,informational,5.35,1.41,1,4.56,,14.666666666666666,0.1983211343442332,20.0,10.0,9.92,Cluster 4
-Survivor.io,survivors io,49500,LOW,137.88,502.69,4,0.5081,informational,5.48,1.15,0,4.61,,14.666666666666666,0.1983211343442332,20.0,10.0,9.92,Cluster 4
-Coin Master,coin master game,40500,LOW,174.91,1357.35,4,0.5019,informational,6.85,4.16,0,6.31,,12.0,0.5355013859478901,20.0,10.0,9.39,Cluster 5
-Coin Master,coin master,40500,LOW,174.91,1357.35,4,0.4996,informational,6.11,3.58,1,5.6,,12.0,0.5355013859478901,20.0,10.0,9.32,Cluster 5
-Souls,soul train,40500,LOW,0.0,0.0,4,0.5001,informational,4.96,0.99,0,4.17,,12.0,0.0,20.0,10.0,9.02,Cluster 8
-Texas HoldEm Poker,texas hold em zynga,33100,LOW,79.9,685.13,4,0.4784,informational,7.23,2.21,0,6.23,,9.807407407407407,0.270297317975819,20.0,10.0,8.65,Cluster 2
-Whiteout Survival,whiteout survival,27100,LOW,263.19,4337.54,4,0.4889,informational,5.25,2.27,1,4.65,,8.02962962962963,1.7112452069137742,20.0,10.0,8.39,Cluster 8
-AFK Journey,afk journey,27100,LOW,558.36,2636.78,4,0.5117,informational,3.87,1.51,0,3.4,,8.02962962962963,1.0402617927871793,20.0,10.0,8.06,Cluster 1
-Call of Dragon,calls of dragons,4400,LOW,975.41,16067.31,4,0.5217,informational,7.0,2.44,0,6.09,,1.3037037037037036,6.33887116326253,20.0,10.0,7.9,Cluster 8
-Call of Dragon,call of dragon,4400,LOW,975.41,16067.31,4,0.5072,informational,6.76,1.1,0,5.63,,1.3037037037037036,6.33887116326253,20.0,10.0,7.86,Cluster 8
-Call of Dragon,calls of dragon,4400,LOW,975.41,16067.31,4,0.5033,informational,6.86,1.1,0,5.71,,1.3037037037037036,6.33887116326253,20.0,10.0,7.86,Cluster 8
-Call of Dragon,call of dragons apk,20,LOW,114.71,16498.92,4,0.5044,informational,4.88,2.44,0,4.39,,0.005925925925925926,6.5091498336047175,20.0,10.0,7.39,Cluster 8
-Call of Dragon,call of dragon apk,20,LOW,114.71,16498.92,4,0.5022,informational,4.89,1.1,0,4.13,,0.005925925925925926,6.5091498336047175,20.0,10.0,7.37,Cluster 8
+Source URL,Keyword,Avg Monthly Searches,Competition,Low CPC (USD),High CPC (USD),Sentiment Score,Sentiment Confidence,Intent,semantic_score,tfidf_score,content_match_score,relevance_bucket,volume_score,cpc_score,competition_score,sentiment_score_scaled,keyword_score,Cluster
+https://familyislandfreeenergy.com/,free game free game free game free game free game,1000000,LOW,5.4,45.71,4,0.4037,informational,5.26,2.98,4.8,,40.0,0.3536867191449412,20.0,10.0,17.59,Cluster 1
+https://familyislandfreeenergy.com/,free free game free game,1000000,LOW,5.4,45.71,4,0.4499,informational,5.24,2.97,4.79,,40.0,0.3536867191449412,20.0,10.0,17.59,Cluster 1
+https://familyislandfreeenergy.com/,free free free game,1000000,LOW,5.4,45.71,4,0.4615,informational,5.21,2.88,4.74,,40.0,0.3536867191449412,20.0,10.0,17.58,Cluster 1
+https://familyislandfreeenergy.com/,free game free game free game,1000000,LOW,5.4,45.71,4,0.4384,informational,5.15,2.98,4.72,,40.0,0.3536867191449412,20.0,10.0,17.58,Cluster 1
+https://familyislandfreeenergy.com/,free game free game free game free game,1000000,LOW,5.4,45.71,4,0.4226,informational,5.23,2.98,4.78,,40.0,0.3536867191449412,20.0,10.0,17.58,Cluster 1
+https://familyislandfreeenergy.com/,free free free free game,1000000,LOW,5.4,45.71,4,0.4487,informational,5.25,2.85,4.77,,40.0,0.3536867191449412,20.0,10.0,17.58,Cluster 1
+https://familyislandfreeenergy.com/,game free game free game free,1000000,LOW,5.4,45.71,4,0.4282,informational,4.9,2.98,4.52,,40.0,0.3536867191449412,20.0,10.0,17.56,Cluster 1
+https://familyislandfreeenergy.com/,game free game free game,1000000,LOW,5.4,45.71,4,0.4556,informational,4.83,2.9,4.44,,40.0,0.3536867191449412,20.0,10.0,17.55,Cluster 1
+https://familyislandfreeenergy.com/,free and game,1000000,LOW,5.4,45.71,4,0.4825,informational,3.78,2.98,3.62,,40.0,0.3536867191449412,20.0,10.0,17.47,Cluster 1
+https://familyislandfreeenergy.com/,free from game,1000000,LOW,5.4,45.71,4,0.4594,informational,3.79,2.98,3.63,,40.0,0.3536867191449412,20.0,10.0,17.47,Cluster 1
+https://familyislandfreeenergy.com/,free in game,1000000,LOW,5.4,45.71,4,0.4933,informational,3.61,2.98,3.48,,40.0,0.3536867191449412,20.0,10.0,17.45,Cluster 1
+https://familyislandfreeenergy.com/,link game,2900,LOW,11.38,3877.16,4,0.5114,informational,3.89,1.27,3.37,,0.07607607607607607,30.0,20.0,10.0,14.36,Cluster 2
+https://familyislandfreeenergy.com/,fun game game,201000,LOW,5.37,37.32,4,0.5183,informational,4.9,2.6,4.44,,8.008008008008009,0.2887680673482652,20.0,10.0,7.93,Cluster 2
+https://familyislandfreeenergy.com/,fun game,201000,LOW,5.37,37.32,4,0.526,informational,4.44,2.07,3.97,,8.008008008008009,0.2887680673482652,20.0,10.0,7.89,Cluster 2
+https://familyislandfreeenergy.com/,a fun game,201000,LOW,5.37,37.32,4,0.5337,informational,4.32,2.07,3.87,,8.008008008008009,0.2887680673482652,20.0,10.0,7.88,Cluster 2
+https://familyislandfreeenergy.com/,and fun game,201000,LOW,5.37,37.32,4,0.5299,informational,4.07,2.07,3.67,,8.008008008008009,0.2887680673482652,20.0,10.0,7.86,Cluster 2
+https://familyislandfreeenergy.com/,fun game fun game,201000,LOW,5.37,37.32,4,0.5603,informational,3.79,2.07,3.45,,8.008008008008009,0.2887680673482652,20.0,10.0,7.83,Cluster 2
+https://familyislandfreeenergy.com/,fun game fun,201000,LOW,5.37,37.32,4,0.5512,informational,3.55,1.66,3.17,,8.008008008008009,0.2887680673482652,20.0,10.0,7.81,Cluster 2
+https://familyislandfreeenergy.com/,fun playing,2400,LOW,107.61,935.77,4,0.5203,informational,3.07,0.66,2.59,,0.056056056056056056,7.240634897708632,20.0,10.0,7.45,Cluster 2
+https://familyislandfreeenergy.com/,free free game play,110000,LOW,10.7,223.83,4,0.4602,informational,5.28,2.87,4.8,,4.364364364364365,1.731912018075086,20.0,10.0,7.31,Cluster 1

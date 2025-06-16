@@ -1,21 +1,11 @@
-Source Keyword,Keyword,Avg Monthly Searches,Competition,Low CPC (USD),High CPC (USD),Sentiment Score,Sentiment Confidence,Intent,semantic_score,tfidf_score,keyword_found_on_site,content_match_score,relevance_bucket,volume_score,cpc_score,competition_score,sentiment_score_scaled,keyword_score,Cluster
-Call of Dragon,call of dragons download,50,LOW,187.55,6415.11,4,0.4947,transactional,5.81,1.74,0,5.0,,0.014814814814814814,2.530887608949917,20.0,10.0,6.26,Cluster 8
-Call of Dragon,call of dragon download,50,LOW,187.55,6415.11,4,0.4773,transactional,5.59,0.85,0,4.64,,0.014814814814814814,2.530887608949917,20.0,10.0,6.23,Cluster 8
-Coin Master,match masters promo codes,1300,LOW,351.11,3752.64,4,0.4999,transactional,5.86,1.38,0,4.96,,0.3851851851851852,1.4804906037230563,20.0,10.0,6.06,Cluster 5
-Pop Slots Casino,pop slots facebook,590,LOW,381.09,2369.59,4,0.4715,transactional,7.48,2.1,0,6.4,,0.1748148148148148,0.9348500601379609,20.0,10.0,5.97,Cluster 7
-Pop Slots Casino,facebook pop slots,590,LOW,381.09,2369.59,4,0.4864,transactional,7.23,2.1,0,6.2,,0.1748148148148148,0.9348500601379609,20.0,10.0,5.95,Cluster 7
-Texas HoldEm Poker,texas hold em against dealer,70,LOW,333.99,2819.19,4,0.4449,transactional,6.94,2.21,0,5.99,,0.02074074074074074,1.1122261408261926,20.0,10.0,5.94,Cluster 2
-Family Island,family island download,90,LOW,379.56,3424.92,4,0.4885,transactional,6.17,1.01,0,5.14,,0.026666666666666665,1.3511985904598285,20.0,10.0,5.93,Cluster 8
-Texas HoldEm Poker,texas holdem poker near me,1900,LOW,87.35,668.83,4,0.5124,transactional,7.14,1.19,0,5.95,,0.562962962962963,0.26386664601136584,20.0,10.0,5.84,Cluster 2
-Texas HoldEm Poker,texas hold em poker tournaments near me,1900,LOW,87.35,668.83,4,0.5142,transactional,6.68,2.28,0,5.8,,0.562962962962963,0.26386664601136584,20.0,10.0,5.83,Cluster 2
-Texas HoldEm Poker,dealing texas hold em,1600,LOW,3.43,292.88,4,0.4798,transactional,7.69,1.82,0,6.52,,0.47407407407407404,0.11554694508889975,20.0,10.0,5.83,Cluster 2
-Texas HoldEm Poker,texas hold em dealing,1600,LOW,3.43,292.88,4,0.5,transactional,7.56,1.82,0,6.41,,0.47407407407407404,0.11554694508889975,20.0,10.0,5.82,Cluster 2
-Texas HoldEm Poker,texas hold em near me,1600,LOW,98.48,615.88,4,0.49,transactional,6.97,2.21,0,6.02,,0.47407407407407404,0.2429768251207033,20.0,10.0,5.82,Cluster 2
-Texas HoldEm Poker,texas hold em tournaments near me,1900,LOW,87.35,668.83,4,0.5149,transactional,6.52,2.23,0,5.66,,0.562962962962963,0.26386664601136584,20.0,10.0,5.81,Cluster 2
-Texas HoldEm Poker,texas hold em games near me,1600,LOW,98.48,615.88,4,0.507,transactional,6.68,2.42,0,5.83,,0.47407407407407404,0.2429768251207033,20.0,10.0,5.8,Cluster 2
-Texas HoldEm Poker,texas holdem tournaments near me,1900,LOW,87.35,668.83,4,0.5201,transactional,6.53,1.23,0,5.47,,0.562962962962963,0.26386664601136584,20.0,10.0,5.8,Cluster 2
-Texas HoldEm Poker,texas holdem near me,1600,LOW,98.48,615.88,4,0.5163,transactional,6.97,1.08,0,5.79,,0.47407407407407404,0.2429768251207033,20.0,10.0,5.79,Cluster 2
-Coin Master,coin master facebook,1000,LOW,381.94,1475.53,4,0.4677,transactional,6.0,2.32,0,5.26,,0.2962962962962963,0.5821257302889383,20.0,10.0,5.79,Cluster 5
-Texas HoldEm Poker,dealing texas holdem poker,1600,LOW,3.43,292.88,4,0.4893,transactional,7.47,0.86,0,6.15,,0.47407407407407404,0.11554694508889975,20.0,10.0,5.79,Cluster 2
-Texas HoldEm Poker,texas holdem dealing,1600,LOW,3.43,292.88,4,0.5121,transactional,7.4,0.73,0,6.07,,0.47407407407407404,0.11554694508889975,20.0,10.0,5.78,Cluster 2
-Texas HoldEm Poker,texas holdem games near me,1600,LOW,98.48,615.88,4,0.5165,transactional,6.75,1.41,0,5.68,,0.47407407407407404,0.2429768251207033,20.0,10.0,5.78,Cluster 2
+Source URL,Keyword,Avg Monthly Searches,Competition,Low CPC (USD),High CPC (USD),Sentiment Score,Sentiment Confidence,Intent,semantic_score,tfidf_score,content_match_score,relevance_bucket,volume_score,cpc_score,competition_score,sentiment_score_scaled,keyword_score,Cluster
+https://familyislandfreeenergy.com/,game offer,210,LOW,89.53,586.26,4,0.5186,transactional,3.53,1.16,3.06,,0.008400000000000001,4.536258498488585,20.0,10.0,6.67,Cluster 1
+https://familyislandfreeenergy.com/,offers free,720,LOW,105.89,452.82,4,0.4894,transactional,3.09,1.86,2.84,,0.028800000000000003,3.503750167648485,20.0,10.0,6.34,Cluster 4
+https://familyislandfreeenergy.com/,game to get,320,LOW,17.56,308.19,4,0.5247,transactional,5.9,3.42,5.4,,0.0128,2.3846578423382065,20.0,10.0,6.26,Cluster 1
+https://familyislandfreeenergy.com/,get this game,170,LOW,13.39,260.85,4,0.4538,transactional,4.62,3.42,4.38,,0.0068000000000000005,2.018358798708333,20.0,10.0,6.05,Cluster 1
+https://familyislandfreeenergy.com/,game get,170,LOW,13.39,260.85,4,0.5065,transactional,4.38,3.42,4.19,,0.0068000000000000005,2.018358798708333,20.0,10.0,6.03,Cluster 1
+https://familyislandfreeenergy.com/,get that game,170,LOW,13.39,260.85,4,0.475,transactional,4.11,3.42,3.97,,0.0068000000000000005,2.018358798708333,20.0,10.0,6.0,Cluster 1
+https://familyislandfreeenergy.com/,get game,720,LOW,13.62,208.81,4,0.4837,transactional,3.94,3.42,3.84,,0.028800000000000003,1.6156929298765077,20.0,10.0,5.88,Cluster 1
+https://familyislandfreeenergy.com/,get free game,390,LOW,12.1,180.78,4,0.4708,transactional,4.43,2.98,4.14,,0.0156,1.398807374469973,20.0,10.0,5.84,Cluster 4
+https://familyislandfreeenergy.com/,free game offers,40,LOW,0.0,0.0,4,0.4952,transactional,4.95,2.13,4.39,,0.0016,0.0,20.0,10.0,5.44,Cluster 4
+https://familyislandfreeenergy.com/,get free link,10,LOW,0.0,0.0,4,0.474,transactional,2.33,1.8,2.22,,0.0004,0.0,20.0,10.0,5.22,Cluster 2

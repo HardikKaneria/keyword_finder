@@ -79,7 +79,7 @@ def fetch_keyword_metrics(keywords, progress_bar=None, status_text=None):
 
     return results
 
-def fetch_keyword_metrics_from_url(url, full_site=True, progress_bar=None, status_text=None):
+def fetch_keyword_metrics_from_url(url, full_site=False, progress_bar=None, status_text=None):
     try:
         client = GoogleAdsClient.load_from_storage(CREDENTIALS_FILE)
         client.login_customer_id = LOGIN_CUSTOMER_ID
@@ -103,12 +103,16 @@ def fetch_keyword_metrics_from_url(url, full_site=True, progress_bar=None, statu
         request.geo_target_constants.append(GEO_TARGET)
         request.keyword_plan_network = network
 
+        # Clear all seeds first by not setting others
         if full_site:
-            request.url_seed.url = url
+            seed = client.get_type("UrlSeed")
+            seed.url = url
+            request.url_seed.CopyFrom(seed)
         else:
-            request.keyword_and_url_seed.url = url
-            # Optionally include seed keywords
-            # request.keyword_and_url_seed.keywords.append("self reflection")  # optional
+            seed = client.get_type("KeywordAndUrlSeed")
+            seed.url = url
+            # Optional: seed.keywords.append("self reflection")
+            request.keyword_and_url_seed.CopyFrom(seed)
 
         response = service.generate_keyword_ideas(request=request)
 
@@ -126,7 +130,7 @@ def fetch_keyword_metrics_from_url(url, full_site=True, progress_bar=None, statu
         if progress_bar:
             progress_bar.progress(1.0)
         if status_text:
-            status_text.text("All keywords fetched!")
+            status_text.text("✅ All keywords fetched!")
 
     except GoogleAdsException as ex:
         print(f"❌ API error for '{url}': {ex.failure.errors[0].message}")

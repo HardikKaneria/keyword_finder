@@ -1,21 +1,3 @@
-Source Keyword,Keyword,Avg Monthly Searches,Competition,Low CPC (USD),High CPC (USD),Sentiment Score,Sentiment Confidence,Intent,semantic_score,tfidf_score,keyword_found_on_site,content_match_score,relevance_bucket,volume_score,cpc_score,competition_score,sentiment_score_scaled,keyword_score,Cluster
-Call of Dragon,call of dragons review,40,LOW,1439.57,4648.4,4,0.5223,commercial,6.55,1.66,0,5.57,,0.011851851851851851,1.8338856171511937,20.0,10.0,6.11,Cluster 8
-Pop Slots Casino,pop slots reviews,20,LOW,1254.59,2396.14,4,0.5028,commercial,7.53,2.73,0,6.57,,0.005925925925925926,0.9453245595647237,20.0,10.0,5.94,Cluster 7
-Texas HoldEm Poker,best hands texas hold em,2900,LOW,119.04,287.74,5,0.5418,commercial,7.35,1.8,0,6.24,,0.8592592592592592,0.11351911356145866,20.0,10.0,5.92,Cluster 2
-Texas HoldEm Poker,best hand in texas hold em,2900,LOW,119.04,287.74,5,0.4942,commercial,7.15,2.19,0,6.16,,0.8592592592592592,0.11351911356145866,20.0,10.0,5.91,Cluster 2
-Texas HoldEm Poker,texas hold em best hands,590,LOW,204.67,1936.48,5,0.4541,commercial,7.34,1.8,0,6.23,,0.1748148148148148,0.7639796101671422,20.0,10.0,5.9,Cluster 2
-Texas HoldEm Poker,texas holdem top hands,2900,LOW,119.04,287.74,4,0.4727,commercial,7.25,0.73,0,5.95,,0.8592592592592592,0.11351911356145866,20.0,10.0,5.89,Cluster 2
-Texas HoldEm Poker,best hand in texas holdem poker,2900,LOW,119.04,287.74,5,0.5078,commercial,7.12,1.28,0,5.95,,0.8592592592592592,0.11351911356145866,20.0,10.0,5.89,Cluster 2
-Texas HoldEm Poker,best texas holdem hands,2900,LOW,119.04,287.74,5,0.5375,commercial,7.23,0.73,0,5.93,,0.8592592592592592,0.11351911356145866,20.0,10.0,5.88,Cluster 2
-Texas HoldEm Poker,best texas holdem poker,50,LOW,258.63,1113.29,5,0.559,commercial,7.33,1.14,0,6.09,,0.014814814814814814,0.4392148951721565,20.0,10.0,5.75,Cluster 2
-Texas HoldEm Poker,best texas holdem,50,LOW,258.63,1113.29,5,0.5745,commercial,7.33,1.03,0,6.07,,0.014814814814814814,0.4392148951721565,20.0,10.0,5.74,Cluster 2
-AFK Arena,best games like afk arena,20,LOW,291.17,989.11,5,0.4931,commercial,6.82,2.37,0,5.93,,0.005925925925925926,0.3902234323165858,20.0,10.0,5.71,Cluster 1
-Pop Slots Casino,pop slots best game,20,LOW,0.0,0.0,5,0.5205,commercial,8.1,3.21,0,7.12,,0.005925925925925926,0.0,20.0,10.0,5.71,Cluster 7
-Pop Slots Casino,best pop slots game,10,LOW,0.0,0.0,5,0.5719,commercial,8.0,3.21,0,7.04,,0.002962962962962963,0.0,20.0,10.0,5.7,Cluster 7
-Pop Slots Casino,best game on pop slots,10,LOW,0.0,0.0,5,0.5558,commercial,8.0,3.21,0,7.04,,0.002962962962962963,0.0,20.0,10.0,5.7,Cluster 7
-Texas HoldEm Poker,best way to play texas holdem,40,LOW,17.98,932.59,5,0.4836,commercial,6.88,1.12,0,5.73,,0.011851851851851851,0.36792517590978224,20.0,10.0,5.69,Cluster 2
-IdleHeroes,new code idle heroes,20,LOW,618.3,1230.61,4,0.4949,commercial,6.26,2.18,0,5.44,,0.005925925925925926,0.485499952526123,20.0,10.0,5.69,Cluster 3
-Texas HoldEm Poker,best texas holdem sites,70,LOW,321.18,1113.29,5,0.5852,commercial,6.55,0.76,0,5.39,,0.02074074074074074,0.4392148951721565,20.0,10.0,5.68,Cluster 2
-Texas HoldEm Poker,best texas holdem online for money,40,LOW,566.92,1188.65,5,0.5972,commercial,6.57,0.7,0,5.4,,0.011851851851851851,0.4689459037145613,20.0,10.0,5.68,Cluster 2
-Texas HoldEm Poker,best texas holdem poker sites,70,LOW,321.18,1113.29,5,0.591,commercial,6.61,0.89,0,5.47,,0.02074074074074074,0.4392148951721565,20.0,10.0,5.68,Cluster 2
-Texas HoldEm Poker,best free texas holdem games,40,LOW,105.68,686.98,5,0.5491,commercial,6.93,1.38,0,5.82,,0.011851851851851851,0.2710271795177969,20.0,10.0,5.67,Cluster 2
+Source URL,Keyword,Avg Monthly Searches,Competition,Low CPC (USD),High CPC (USD),Sentiment Score,Sentiment Confidence,Intent,semantic_score,tfidf_score,content_match_score,relevance_bucket,volume_score,cpc_score,competition_score,sentiment_score_scaled,keyword_score,Cluster
+https://familyislandfreeenergy.com/,free new game,1600,LOW,12.74,154.96,4,0.4811,commercial,4.86,2.84,4.46,,0.024024024024024024,1.1990219645307392,20.0,10.0,5.81,Cluster 1
+https://familyislandfreeenergy.com/,stop playing,2900,LOW,0.0,0.0,4,0.4465,commercial,3.01,0.28,2.46,,0.07607607607607607,0.0,20.0,10.0,5.27,Cluster 2

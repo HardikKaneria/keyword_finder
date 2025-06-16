@@ -5,9 +5,6 @@ import sqlite3
 import json
 import pandas as pd
 import streamlit as st
-from utils.AIDA_stage import classify_keyword_stage
-# from services.idea_generation import generate_aida_content_plan
-# from utils.predict_aida_mlt import generate_predictions
 from utils.url_matcher import match_urls_to_aida
 
 # === Load environment and set constants ===
@@ -90,7 +87,8 @@ def run_aida_page():
         df = load_data()
 
         with st.spinner("🔍 Classifying AIDA stages..."):
-            stage_df = classify_keyword_stage(df)
+            # stage_df = classify_keyword_stage(df)
+            stage_df = df  # Pass-through if stage classification is skipped
 
         if run_media:
             with st.spinner("📄 Generating Media Plans..."):
