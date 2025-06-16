@@ -3,6 +3,12 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 from sentence_transformers import SentenceTransformer, util
+import sqlite3
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from services.data_store import get_combined_website_texts
 
 # === Setup ===
 model = SentenceTransformer("intfloat/e5-small-v2")
@@ -37,16 +43,47 @@ def calculate_chunked_keyword_scores(df_scored, df_pages, scale_0_to_10=True, ma
         keyword = f"query: {row['Keyword']}"
         keyword_embed = model.encode(keyword, convert_to_tensor=True)
 
-        best_score, best_text = -1, ""
+        best_score = -1
         for page_text in df_pages["visible_text"].fillna(""):
             for chunk in chunk_text(page_text, max_tokens):
                 passage = f"passage: {chunk}"
                 passage_embed = get_or_compute_embedding(passage, model)
                 score = util.cos_sim(keyword_embed, passage_embed).item()
                 if score > best_score:
-                    best_score, best_text = score, chunk
+                    best_score = score
 
         final_score = round(best_score * 10, 2) if scale_0_to_10 else best_score
-        results.append((row["Keyword"], final_score, best_text))
+        results.append((row["Keyword"], final_score))
 
-    return pd.DataFrame(results, columns=["Keyword", "content_match_score", "top_matching_text"])
+    return pd.DataFrame(results, columns=["Keyword", "content_match_score"])
+
+def main():
+    DB_FILE = "data/keyword_data.db"
+    conn = sqlite3.connect(DB_FILE)
+    
+    # Load keywords table (assuming it has 'Keyword' column)
+    df_keywords = pd.read_sql("SELECT Keyword FROM keyword_ranked", conn)
+
+    # Load page text
+    df_website = get_combined_website_texts()
+    df_pages = pd.DataFrame({
+        "visible_text": df_website["visible_text"].tolist()
+    })
+
+    # Compute content match scores
+    df_scores = calculate_chunked_keyword_scores(df_keywords, df_pages)
+
+    # Store back scores in 'keywords' table
+    cursor = conn.cursor()
+    for _, row in df_scores.iterrows():
+        cursor.execute(
+            "UPDATE keyword_ranked SET content_match_score = ? WHERE Keyword = ?",
+            (row["content_match_score"], row["Keyword"])
+        )
+
+    conn.commit()
+    conn.close()
+    print("✅ Content match scores updated successfully.")
+
+if __name__ == "__main__":
+    main()

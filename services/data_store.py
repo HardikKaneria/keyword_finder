@@ -37,7 +37,7 @@ def get_combined_website_keywords(db_file=WEBSITE_FILE):
     conn = sqlite3.connect("data/website_data.db")
     df_keywords = pd.read_sql_query("SELECT * FROM keywords_extraction", conn)
     conn.close()
-    df_keywords = df_keywords.rename(columns={"keyword": "Keyword", "score": "keyword_score"})
+    df_keywords = df_keywords.rename(columns={"keyword": "Keyword", "score": "content_score"})
 
     return df_keywords
 
@@ -59,14 +59,6 @@ def store_data_in_sqlite(df):
     conn.close()
 
 
-def export_top_keywords_by_intent(df):
-    for intent in df["Intent"].unique():
-        intent_df = df[df["Intent"] == intent].sort_values("keyword_score", ascending=False).head(20)
-        filename = os.path.join(EXPORT_DIR, f"top_keywords_{intent}.csv")
-        intent_df.to_csv(filename, index=False)
-        print(f"📁 Exported: {filename}")
-
-
 def store_top_keywords_per_source(df, table_name="top_keywords_per_source", top_n=10, min_score_ratio=0.3):
     if "Source Keyword" not in df.columns:
         print("⚠️ 'Source Keyword' missing – defaulting to 'Keyword' as source.")
@@ -76,25 +68,29 @@ def store_top_keywords_per_source(df, table_name="top_keywords_per_source", top_
     top_keywords = []
 
     for source_kw, group in df.groupby("Source Keyword"):
-        sorted_group = group.sort_values("keyword_score", ascending=False).reset_index(drop=True)
-        if not sorted_group.empty:
-            top_score = sorted_group.loc[0, "keyword_score"]
-            min_allowed = top_score * min_score_ratio
-            filtered = sorted_group[
-                (sorted_group["keyword_score"] >= min_allowed) &
-                (sorted_group["Avg Monthly Searches"] > 1000) &
-                (sorted_group["content_match_score"] < 10) &
-                (sorted_group["content_match_score"] >= 0.2)
-            ]
-            limited = filtered.head(top_n)
-            top_keywords.append(limited)
+        sorted_group = group.sort_values("content_score", ascending=False).reset_index(drop=True)
+        if sorted_group.empty or "content_score" not in sorted_group.columns:
+            continue
+
+        top_score = sorted_group.loc[0, "content_score"]
+        min_allowed = top_score * min_score_ratio
+
+        filtered = sorted_group[
+            (sorted_group["content_score"] >= min_allowed) &
+            (sorted_group["Avg Monthly Searches"] > 1000) &
+            (sorted_group["content_match_score"] >= 8) &
+            (sorted_group["content_match_score"] < 10)
+        ]
+
+        limited = filtered.head(top_n)
+        top_keywords.append(limited)
 
     if top_keywords:
         final_df = pd.concat(top_keywords, ignore_index=True)
         final_df.to_sql(table_name, conn, if_exists="replace", index=False)
-        print(f"📦 Stored top keywords into '{table_name}' table with dynamic score filtering.")
+        print(f"📦 Stored top content-optimized keywords into '{table_name}' table.")
     else:
-        print(f"⚠️ No keywords met the filtering criteria. Nothing stored in '{table_name}'.")
+        print(f"⚠️ No qualifying keywords found using content_score. Nothing stored in '{table_name}'.")
 
     conn.commit()
     conn.close()

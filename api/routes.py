@@ -2,7 +2,6 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 from typing import List
 import pandas as pd
-
 from services.keyword_fetcher import fetch_keyword_metrics_from_url
 from utils.text_analysis import perform_sentiment_analysis, calculate_keyword_scores
 from utils.keyword_content_matcher import calculate_chunked_keyword_scores
@@ -14,7 +13,6 @@ router = APIRouter()
 class URLRequest(BaseModel):
     url: str
 
-@router.post("/analyze-url")
 @router.post("/analyze-url")
 def analyze_url(data: URLRequest):
     try:
@@ -42,6 +40,9 @@ def analyze_url(data: URLRequest):
         df_final = df_combined.merge(df_relevance, on="Keyword", how="left")
 
         df_final = calculate_keyword_scores(df_final)
+
+        print(f"✅ Successfully analyzed URL: {data.url}")
+
 
         return df_final.to_dict(orient="records")
 

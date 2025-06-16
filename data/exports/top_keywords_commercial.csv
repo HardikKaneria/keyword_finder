@@ -1,3 +1,21 @@
-Source URL,Keyword,Avg Monthly Searches,Competition,Low CPC (USD),High CPC (USD),Sentiment Score,Sentiment Confidence,Intent,semantic_score,tfidf_score,content_match_score,relevance_bucket,volume_score,cpc_score,competition_score,sentiment_score_scaled,keyword_score,Cluster
-https://familyislandfreeenergy.com/,free new game,1600,LOW,12.74,154.96,4,0.4811,commercial,4.86,2.84,4.46,,0.024024024024024024,1.1990219645307392,20.0,10.0,5.81,Cluster 1
-https://familyislandfreeenergy.com/,stop playing,2900,LOW,0.0,0.0,4,0.4465,commercial,3.01,0.28,2.46,,0.07607607607607607,0.0,20.0,10.0,5.27,Cluster 2
+Source URL,Keyword,Avg Monthly Searches,Competition,Low CPC (USD),High CPC (USD),Sentiment Score,Sentiment Confidence,Intent,content_match_score,relevance_bucket,volume_score,cpc_score,difficulty_score,relevance_score,sentiment_score,base_score,intent_multiplier,content_score,keyword_score,Cluster
+https://genzgamecode.com/,news for gamers,49500,LOW,314.22,1109.27,4,0.4971,commercial,8.64,Very High,22.54601226993865,40.95556260614771,100,70.49180327868855,100.0,54.4,1.2,65.28,0.0,Cluster 3
+https://genzgamecode.com/,best mobile games,22200,LOW,306.47,988.28,5,0.5957,commercial,8.67,Very High,8.588957055214724,36.43940949217074,100,75.40983606557369,100.0,50.75,1.2,60.9,0.0,Cluster 2
+https://genzgamecode.com/,top top game,8100,LOW,8.51,25.27,5,0.6825,commercial,8.33,Very High,1.3803680981595092,0.49345850208096154,100,19.672131147540874,100.0,33.39,1.2,40.07,0.0,Cluster 5
+https://genzgamecode.com/,top game top,8100,LOW,8.51,25.27,5,0.5996,commercial,8.34,Very High,1.3803680981595092,0.49345850208096154,100,21.31147540983592,100.0,33.64,1.2,40.37,0.0,Cluster 5
+https://genzgamecode.com/,game of the best,18100,LOW,9.47,221.24,4,0.4667,commercial,8.27,Very High,6.492842535787322,7.808364905470223,100,9.836065573770291,100.0,34.66,1.2,41.59,0.0,Cluster 6
+https://genzgamecode.com/,top games,8100,LOW,8.51,25.27,5,0.4904,commercial,8.41,Very High,1.3803680981595092,0.49345850208096154,100,32.78688524590155,100.0,35.36,1.2,42.43,0.0,Cluster 5
+https://genzgamecode.com/,games are the best,18100,LOW,9.47,221.24,5,0.4654,commercial,8.3,Very High,6.492842535787322,7.808364905470223,100,14.754098360655728,100.0,35.4,1.2,42.48,0.0,Cluster 6
+https://genzgamecode.com/,new games,33100,MEDIUM,12.39,347.79,4,0.5109,commercial,8.62,Very High,14.161554192229039,12.532054272969898,50,67.21311475409816,100.0,36.13,1.2,43.36,0.0,Cluster 7
+https://genzgamecode.com/,top top games,8100,LOW,8.51,25.27,5,0.614,commercial,8.48,Very High,1.3803680981595092,0.49345850208096154,100,44.26229508196718,100.0,37.08,1.2,44.5,0.0,Cluster 5
+https://genzgamecode.com/,top games games,8100,LOW,8.51,25.27,5,0.5249,commercial,8.57,Very High,1.3803680981595092,0.49345850208096154,100,59.01639344262291,100.0,39.3,1.2,47.16,0.0,Cluster 5
+https://genzgamecode.com/,best a games,18100,LOW,9.47,221.24,4,0.4893,commercial,8.47,Very High,6.492842535787322,7.808364905470223,100,42.622950819672134,100.0,39.58,1.2,47.5,0.0,Cluster 6
+https://genzgamecode.com/,best gamer of all time,12100,LOW,4.3,172.18,5,0.8153,commercial,8.53,Very High,3.425357873210634,5.97711875478248,100,52.459016393442425,100.0,39.92,1.2,47.9,0.0,Cluster 6
+https://genzgamecode.com/,2025 game,8100,LOW,3.07,404.61,4,0.5087,commercial,8.51,Very High,1.3803680981595092,14.652955338646164,100,49.18032786885233,100.0,40.65,1.2,48.78,0.0,Cluster 4
+https://genzgamecode.com/,game best game,18100,LOW,9.47,221.24,5,0.6303,commercial,8.52,Very High,6.492842535787322,7.808364905470223,100,50.81967213114738,100.0,40.81,1.2,48.97,0.0,Cluster 6
+https://genzgamecode.com/,best games,18100,LOW,9.47,221.24,5,0.5338,commercial,8.53,Very High,6.492842535787322,7.808364905470223,100,52.459016393442425,100.0,41.05,1.2,49.26,0.0,Cluster 6
+https://genzgamecode.com/,best game best game,18100,LOW,9.47,221.24,5,0.7576,commercial,8.58,Very High,6.492842535787322,7.808364905470223,100,60.655737704917954,100.0,42.28,1.2,50.74,0.0,Cluster 6
+https://genzgamecode.com/,best best gaming,18100,LOW,9.47,221.24,5,0.605,commercial,8.61,Very High,6.492842535787322,7.808364905470223,100,65.5737704918031,100.0,43.02,1.2,51.62,0.0,Cluster 6
+https://genzgamecode.com/,best games of all time,12100,LOW,4.3,172.18,5,0.7444,commercial,8.67,Very High,3.425357873210634,5.97711875478248,100,75.40983606557369,100.0,43.36,1.2,52.03,0.0,Cluster 6
+https://genzgamecode.com/,best games for all time,12100,LOW,4.3,172.18,5,0.7951,commercial,8.68,Very High,3.425357873210634,5.97711875478248,100,77.04918032786874,100.0,43.61,1.2,52.33,0.0,Cluster 6
+https://genzgamecode.com/,new games released,8100,MEDIUM,155.82,569.9,4,0.5051,commercial,8.56,Very High,1.3803680981595092,20.82267968123029,50,57.377049180327866,100.0,33.12,1.2,39.74,0.0,Cluster 7

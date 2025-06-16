@@ -7,11 +7,11 @@ import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from services.keyword_fetcher import fetch_keyword_metrics, fetch_keyword_metrics_from_url, fetch_exact_keyword_metrics
-from utils.text_analysis import perform_sentiment_analysis, calculate_keyword_scores
+from utils.text_analysis import perform_sentiment_analysis, calculate_keyword_scores, score_keywords_for_content
 from utils.keyword_content_matcher import calculate_chunked_keyword_scores
 from utils.intent_classifier import bulk_classify_keyword_intents
 from utils.clustering import cluster_keywords
-from services.data_store import store_data_in_sqlite, export_top_keywords_by_intent, store_top_keywords_per_source, get_combined_website_texts
+from services.data_store import store_data_in_sqlite, store_top_keywords_per_source, get_combined_website_texts
 
 # === Load environment and set constants ===
 
@@ -135,49 +135,53 @@ def process_and_display_results(keyword_metrics):
                 progress_bar=intent_progress,
                 status_callback=intent_status
             )
+            print(df_scored.head())
         except Exception as e:
             st.warning(f"⚠️ Intent classification failed: {e}")
             df_scored["Intent"] = "Unknown"
 
         # === Content Score ===
         try:
-            content_progress = st.progress(0)
-            content_status = st.empty()
 
             df_pages = get_combined_website_texts()
 
-            df_scored = calculate_chunked_keyword_scores(
+            df_content_scored = calculate_chunked_keyword_scores(
                 df_scored,
                 df_pages,
-                use_context=True,
                 scale_0_to_10=True,
-                use_tfidf=True,
-                blend_weight_semantic=0.8,
-                progress_bar=content_progress,
-                status_callback=content_status
             )
+
+            print(df_scored.head())
+
         except Exception as e:
             st.warning(f"⚠️ Content score calculation failed: {e}")
-            df_scored["content_match_score"] = 0.0
+            df_content_scored["content_match_score"] = 0.0
 
         # === Relevance Bucket ===
-        df_scored["relevance_bucket"] = pd.cut(
-            df_scored["content_match_score"],
-            bins=[0, 0.2, 0.5, 0.8, 1.0],
+        df_content_scored["relevance_bucket"] = pd.cut(
+            df_content_scored["content_match_score"],
+            bins=[0, 2, 5, 8, 10],
             labels=["Low", "Medium", "High", "Very High"]
         )
+
+        df_final_1 = df_scored.merge(df_content_scored, on="Keyword", how="left")
+
+        print(df_content_scored.head())
 
         # === Final Score ===
         try:
             score_progress = st.progress(0)
             score_status = st.empty()
-            df_scored = calculate_keyword_scores(df_scored, progress_bar=score_progress, status_callback=score_status)
+            df_k_scored = score_keywords_for_content(df_final_1, progress_bar=score_progress, status_callback=score_status)
+            print(df_scored.head())
+            st.dataframe(df_k_scored[["Keyword", "content_score", "Intent"]].head(20))
         except Exception as e:
             st.warning(f"⚠️ Final keyword scoring failed: {e}")
-            df_scored["keyword_score"] = 0.0
+            df_k_scored["content_score"] = 0.0
 
         # === Merge Clusters ===
-        df_final = df_scored.merge(clusters, on="Keyword", how="left")
+        df_final = df_k_scored.merge(clusters, on="Keyword", how="left")
+        st.dataframe(df_final.head(20))
 
         # === Save to DB ===
         try:
@@ -185,7 +189,6 @@ def process_and_display_results(keyword_metrics):
             store_status.text("💾 Saving results to database...")
             df_all = df_final.drop_duplicates(subset=["Keyword"])
             store_data_in_sqlite(df_all)
-            export_top_keywords_by_intent(df_all)
             store_top_keywords_per_source(df_all)
             with open(CACHE_FILE, "wb") as f:
                 pickle.dump(SCRAPE_CACHE, f)

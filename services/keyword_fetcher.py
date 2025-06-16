@@ -79,7 +79,7 @@ def fetch_keyword_metrics(keywords, progress_bar=None, status_text=None):
 
     return results
 
-def fetch_keyword_metrics_from_url(url, full_site=False, progress_bar=None, status_text=None):
+def fetch_keyword_metrics_from_url(url, full_site=False, progress_bar=None, status_text=None, min_traffic=5000):
     try:
         client = GoogleAdsClient.load_from_storage(CREDENTIALS_FILE)
         client.login_customer_id = LOGIN_CUSTOMER_ID
@@ -103,29 +103,27 @@ def fetch_keyword_metrics_from_url(url, full_site=False, progress_bar=None, stat
         request.geo_target_constants.append(GEO_TARGET)
         request.keyword_plan_network = network
 
-        # Clear all seeds first by not setting others
+        # ✅ Correct way to assign seed
         if full_site:
-            seed = client.get_type("UrlSeed")
-            seed.url = url
-            request.url_seed.CopyFrom(seed)
+            request.url_seed.url = url
         else:
-            seed = client.get_type("KeywordAndUrlSeed")
-            seed.url = url
-            # Optional: seed.keywords.append("self reflection")
-            request.keyword_and_url_seed.CopyFrom(seed)
+            request.keyword_and_url_seed.url = url
 
         response = service.generate_keyword_ideas(request=request)
 
         for idea in response:
             metrics = idea.keyword_idea_metrics
-            results.append({
-                "Source URL": url,
-                "Keyword": idea.text,
-                "Avg Monthly Searches": metrics.avg_monthly_searches,
-                "Competition": metrics.competition.name,
-                "Low CPC (USD)": round(metrics.low_top_of_page_bid_micros / 1e6, 2) if metrics.low_top_of_page_bid_micros else 0.0,
-                "High CPC (USD)": round(metrics.high_top_of_page_bid_micros / 1e6, 2) if metrics.high_top_of_page_bid_micros else 0.0,
-            })
+            monthly_searches = metrics.avg_monthly_searches
+
+            if monthly_searches and monthly_searches >= min_traffic:
+                results.append({
+                    "Source URL": url,
+                    "Keyword": idea.text,
+                    "Avg Monthly Searches": monthly_searches,
+                    "Competition": metrics.competition.name,
+                    "Low CPC (USD)": round(metrics.low_top_of_page_bid_micros / 1e6, 2) if metrics.low_top_of_page_bid_micros else 0.0,
+                    "High CPC (USD)": round(metrics.high_top_of_page_bid_micros / 1e6, 2) if metrics.high_top_of_page_bid_micros else 0.0,
+                })
 
         if progress_bar:
             progress_bar.progress(1.0)

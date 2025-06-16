@@ -1,2 +1,3 @@
-Source URL,Keyword,Avg Monthly Searches,Competition,Low CPC (USD),High CPC (USD),Sentiment Score,Sentiment Confidence,Intent,semantic_score,tfidf_score,content_match_score,relevance_bucket,volume_score,cpc_score,competition_score,sentiment_score_scaled,keyword_score,Cluster
-https://familyislandfreeenergy.com/,free game websites,6600,LOW,10.54,150.65,4,0.4611,navigational,5.1,1.64,4.41,,0.22422422422422422,1.1656728120583109,20.0,10.0,5.86,Cluster 1
+Source URL,Keyword,Avg Monthly Searches,Competition,Low CPC (USD),High CPC (USD),Sentiment Score,Sentiment Confidence,Intent,content_match_score,relevance_bucket,volume_score,cpc_score,difficulty_score,relevance_score,sentiment_score,base_score,intent_multiplier,content_score,keyword_score,Cluster
+https://genzgamecode.com/,netflix games,27100,LOW,117.08,397.72,4,0.4947,navigational,8.82,Very High,11.094069529652351,14.395774621600943,100,100.0,100.0,50.65,0.0,0.0,0.0,Cluster 2
+https://genzgamecode.com/,game platforms,5400,LOW,83.5,441.63,4,0.5055,navigational,8.48,Very High,0.0,16.034788451130066,100,44.26229508196718,100.0,39.85,0.0,0.0,0.0,Cluster 2

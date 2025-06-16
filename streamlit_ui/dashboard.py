@@ -123,7 +123,7 @@ if st.session_state.active_tab == "dashboard":
         end_idx = min(start_idx + rows_per_page, total_rows)
 
         st.markdown(f"Showing rows {start_idx + 1} to {end_idx} of {total_rows}")
-        st.dataframe(df.sort_values("keyword_score", ascending=False).iloc[start_idx:end_idx], use_container_width=True)
+        st.dataframe(df.sort_values("content_score", ascending=False).iloc[start_idx:end_idx], use_container_width=True)
 
         st.markdown("---")
         st.markdown("### 💰 High CPC + Low Competition")

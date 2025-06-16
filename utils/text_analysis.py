@@ -80,3 +80,54 @@ def calculate_keyword_scores(df, progress_bar=None, status_callback=None):
         progress_bar.progress(1.0)
 
     return df
+
+def score_keywords_for_content(df, progress_bar=None, status_callback=None):
+    def normalize(series, scale=100):
+        min_val, max_val = series.min(), series.max()
+        return ((series - min_val) / (max_val - min_val) * scale).fillna(0) if max_val > min_val else 0
+
+    # === Step 1: Normalize each factor ===
+    if status_callback:
+        status_callback.text("🔎 Normalizing keyword metrics...")
+
+    df["volume_score"] = normalize(df["Avg Monthly Searches"], scale=100)
+    df["cpc_score"] = normalize(df["High CPC (USD)"], scale=100)
+    df["difficulty_score"] = df["Competition"].str.upper().map({"LOW": 100, "MEDIUM": 50, "HIGH": 0}).fillna(0)
+    df["relevance_score"] = normalize(df["content_match_score"], scale=100)
+    df["sentiment_score"] = ((df["Sentiment Score"].clip(-1, 1) + 1) / 2 * 100).fillna(0)
+
+    if progress_bar:
+        progress_bar.progress(0.5)
+
+    # === Step 2: Raw score calculation ===
+    if status_callback:
+        status_callback.text("⚖️ Calculating base keyword scores...")
+
+    df["base_score"] = (
+        df["volume_score"] * 0.25 +
+        df["cpc_score"] * 0.20 +
+        df["difficulty_score"] * 0.20 +
+        df["relevance_score"] * 0.15 +
+        df["sentiment_score"] * 0.10
+    ).round(2)
+
+    # === Step 3: Intent multiplier ===
+    intent_multipliers = {
+        "informational": 1.2,
+        "commercial": 1.2,
+        "conversational": 1.1,
+        "transactional": 0.8,
+        "navigational": 0.0
+    }
+
+    df["intent_multiplier"] = df["Intent"].str.lower().map(intent_multipliers).fillna(1.0)
+
+    # Final score = base score * intent multiplier
+    df["content_score"] = (df["base_score"] * df["intent_multiplier"]).round(2)
+
+    if progress_bar:
+        progress_bar.progress(1.0)
+    if status_callback:
+        status_callback.text("✅ Content keyword scoring complete.")
+
+    return df.sort_values(by="content_score", ascending=False)
